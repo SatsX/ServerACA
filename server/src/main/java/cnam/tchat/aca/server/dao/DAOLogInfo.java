@@ -10,8 +10,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import io.LogInfo;
-import main.Account;
+import cnam.tchat.aca.server.io.LogInfo;
 
 /**
  * @author Arnold
@@ -28,7 +27,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		//useless
 	}
 
-	@Override
 	public LogInfo find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -74,7 +72,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		}
 	}
 
-	@Override
 	public LogInfo create(LogInfo obj) throws DAOException {
 		final String sql = "INSERT INTO `logInfo` (`ip_adress`, `hour`)"
 				+ " VALUES ( ? , ? ) ;";
@@ -114,7 +111,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		}
 	}
 
-	@Override
 	public LogInfo update(LogInfo obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `logInfo` SET `ip_adress` = ? ,"
@@ -158,7 +154,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 				}
 	}
 
-	@Override
 	public void delete(LogInfo obj) throws DAOException {
 		final String sql = "DELETE FROM `logInfo` WHERE `id_log` = ? ;";
 		
