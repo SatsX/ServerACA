@@ -19,10 +19,10 @@ import org.apache.log4j.Logger;
  * @author Arnold
  *
  */
-public class MainClient {
+public class MainClient2 {
 	
 	//private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
-	private static final String NICKNAME = "Erf...";
+	private static final String NICKNAME = "Nick";
 	private static final int SERVER_PORT = 12345;
 	private static final String SERVER_HOST = "127.0.0.1";
 	/**
@@ -80,7 +80,7 @@ public class MainClient {
 					}
 				}
 	}
-	public MainClient() throws ClientException {
+	public MainClient2() throws ClientException {
 		// Useless
 	}
 	
@@ -88,7 +88,7 @@ public class MainClient {
 		//LOG.info("Start client");
 		
 		try{
-			MainClient.runClient();
+			MainClient2.runClient();
 			System.exit(0);
 		}catch (ClientException e){
 			//LOG.error("ERROR ON CLIENT");
