@@ -77,17 +77,5 @@ public class MainServer {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		LOG.info("Start server on the port : " + SERVER_PORT + ".");
-		try {
-			run();
-		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			LOG.error("ERROR on the server");
-		}
-		
-		System.exit(0);
-	}
 
 }
