@@ -18,8 +18,8 @@ import cnam.tchat.aca.server.io.User;
  */
 public class DAOUser implements DAO<User> {
 
-	private static final Logger LOG = Logger.getLogger(DAOLogInfo.class.getName());
-	private static final String URL = "jdbc:mysql://localhost:3306/cnam?useSSL=false";
+	private static final Logger LOG = Logger.getLogger(DAOUser.class.getName());
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "";
 	
@@ -47,12 +47,11 @@ public class DAOUser implements DAO<User> {
 			if(r.next()){
 				a.setUserId(r.getInt("User_id"));
 				a.setUserName(r.getString("User_name"));
-				a.setConnectionDate(r.getDate("Connection_date"));
 				
 				return a;
 				
 			}else{
-				throw new DAOException("Error no log information for this id.");
+				throw new DAOException("Error no user for this id.");
 			}
 				
 		} catch (SQLException e){
@@ -72,32 +71,24 @@ public class DAOUser implements DAO<User> {
 		}
 	}
 
-	public User create(User obj) throws DAOException {
-		final String sql = "INSERT INTO `user` (`User_name`, `Connection_date`)"
+	public void create(User obj) throws DAOException {
+		final String sql = "INSERT INTO `user` (`User_id`, `User_name`)"
 				+ " VALUES ( ? , ? ) ;";
 		
 		Connection c = null;
 		PreparedStatement st = null;
 		int r = 0;
-		User a = new User();
+		
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setString(1, obj.getUserName());
-			st.setDate(2, obj.getConnectionDate());
+			st.setInt(1, obj.getUserId());
+			st.setString(2, obj.getUserName());
 			r = st.executeUpdate();
-			
-			if(r > 0){
-				
-				return a;
-				
-			}else{
-				throw new DAOException("Insertion didn't work.");
-			}
 				
 		} catch (SQLException e){
-			throw new DAOException("Error in SQL engines during log information creation.", e);
+			throw new DAOException("Error in SQL engines during user creation.", e);
 		}finally{
 			try{
 				if(st != null)
@@ -111,36 +102,29 @@ public class DAOUser implements DAO<User> {
 		}
 	}
 
-	public User update(User obj) throws DAOException {
+	public void update(User obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `user` SET `User_name` = ? ,"
-						+ " `Connection_date` = ? ,"
 						+ "WHERE `User_id` = ? ;";
 				
 				Connection c = null;
 				PreparedStatement st = null;
 				int r = 0;
-				User a = new User();
+				
 				
 				try{
 					// init connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getUserName());
-					st.setDate(2, obj.getConnectionDate());
 					r = st.executeUpdate();
 					
-					// check modification
-					if(r > 0){
-						
-						return a;
-						
-					}else{
-						throw new DAOException("Update didn't work.");
+					// check modification		
+					if(r < 1){
+						throw new DAOException("No user was updated.");
 					}
-						
 				} catch (SQLException e){
-					throw new DAOException("Error in SQL engines during log information updating.", e);
+					throw new DAOException("Error in SQL engines during user updating.", e);
 				}finally{
 					try{
 						if(st != null)
@@ -168,11 +152,11 @@ public class DAOUser implements DAO<User> {
 			r = st.executeUpdate();
 			
 			if(r < 1){
-				throw new DAOException("Delete didn't work.");
+				throw new DAOException("No user was deleted.");
 			}
 				
 		} catch (SQLException e){
-			throw new DAOException("Error in SQL engines during log information deleting.", e);
+			throw new DAOException("Error in SQL engines during user deleting.", e);
 		}finally{
 			try{
 				if(st != null)
