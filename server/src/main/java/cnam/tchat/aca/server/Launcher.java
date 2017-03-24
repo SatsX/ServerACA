@@ -9,7 +9,8 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.ServerException;
 
 /**
- * @author arnold
+ * @authors Arnold / Adrien / Cihat
+ * Version 1.1
  *
  */
 public class Launcher {
