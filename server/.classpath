@@ -22,7 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/arnold/Documents/lib_jar/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="/home/arnold/Documents/lib_jar/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adrie/workspace/cnam_bdd.zip_expanded/cnam-bdd/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/adrie/workspace/cnam_bdd.zip_expanded/cnam-bdd/lib/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

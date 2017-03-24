@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import cnam.tchat.aca.server.io.LogInfo;
 
 /**
- * @author Arnold
+ * @authors Arnold / Adrien / Cihat
  *
  */
 public class DAOLogInfo implements DAO<LogInfo> {
@@ -23,7 +23,7 @@ public class DAOLogInfo implements DAO<LogInfo> {
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "";
 	
-	public DAOLogInfo() throws DAOException{
+	protected DAOLogInfo() throws DAOException{
 		//useless
 	}
 
@@ -72,14 +72,13 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		}
 	}
 
-	public LogInfo create(LogInfo obj) throws DAOException {
+	public void create(LogInfo obj) throws DAOException {
 		final String sql = "INSERT INTO `logInfo` (`ip_adress`, `hour`)"
 				+ " VALUES ( ? , ? ) ;";
 		
 		Connection c = null;
 		PreparedStatement st = null;
 		int r = 0;
-		LogInfo a = new LogInfo();
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -87,14 +86,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 			st.setString(1, obj.getIpAdress());
 			st.setDate(2, obj.getHour());
 			r = st.executeUpdate();
-			
-			if(r > 0){
-				
-				return a;
-				
-			}else{
-				throw new DAOException("Insertion didn't work.");
-			}
 				
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information creation.", e);
@@ -111,7 +102,7 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		}
 	}
 
-	public LogInfo update(LogInfo obj) throws DAOException {
+	public void update(LogInfo obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `logInfo` SET `ip_adress` = ? ,"
 						+ " `hour` = ? ,"
@@ -120,7 +111,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 				Connection c = null;
 				PreparedStatement st = null;
 				int r = 0;
-				LogInfo a = new LogInfo();
 				
 				try{
 					// init connection
@@ -131,12 +121,9 @@ public class DAOLogInfo implements DAO<LogInfo> {
 					r = st.executeUpdate();
 					
 					// check modification
-					if(r > 0){
+					if(r < 1){
+						throw new DAOException("No log info updated");
 						
-						return a;
-						
-					}else{
-						throw new DAOException("Update didn't work.");
 					}
 						
 				} catch (SQLException e){
