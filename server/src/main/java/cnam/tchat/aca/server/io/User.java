@@ -7,14 +7,14 @@ import java.sql.Date;
 import cnam.tchat.aca.server.dao.DAOUser;
 
 /**
- * @author Arnold
+ * @author Arnold / Adrien / Cihat
  *
  */
 public class User {
 
 	private int userId;
 	private String userName;
-	private Date connectionDate;
+	
 	
 	/**
 	 * @return the userId
@@ -44,18 +44,15 @@ public class User {
 		this.userName = userName;
 	}
 
-	/**
-	 * @return the connectionDate
-	 */
-	public Date getConnectionDate() {
-		return connectionDate;
-	}
 
-	/**
-	 * @param hour the connectionDate to set
-	 */
-	public void setConnectionDate(Date connectionDate) {
-		this.connectionDate = connectionDate;
+
+	
+	public boolean compareTo(User u){
+		if(this.userId == u.userId && this.userName.compareTo(u.userName) == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public User() {
