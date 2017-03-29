@@ -24,5 +24,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/home/arnold/Documents/lib_jar/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="/home/arnold/Documents/lib_jar/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="/home/arnold/Documents/lib_jar/java-json.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
