@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cnam.tchat.aca.server;
 
 import org.apache.log4j.Logger;
@@ -9,7 +6,7 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.ServerException;
 
 /**
- * @authors Cihat
+ * @author Cihat
  *
  */
 public class Launcher {
@@ -19,10 +16,9 @@ public class Launcher {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void Main(String[] args) {
 		// TODO Auto-generated method stub
 		MainServer server = new MainServer();
-		
 		
 		LOG.info("Start server on the port : " + server.SERVER_PORT + ".");
 		try {

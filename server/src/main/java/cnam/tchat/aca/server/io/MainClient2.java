@@ -84,7 +84,7 @@ public class MainClient2 {
 		// Useless
 	}
 	
-	public static void main(String[] args) {
+	public static void Main(String[] args) {
 		//LOG.info("Start client");
 		
 		try{
