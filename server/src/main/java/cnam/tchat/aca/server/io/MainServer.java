@@ -21,9 +21,6 @@ public class MainServer {
 	private static final Logger LOG = Logger.getLogger(MainServer.class.getName());
 	public static final int SERVER_PORT = 12345;
 
-	/**
-	 * 
-	 */
 	
 	public static void run() throws ServerException{
 		// TODO Auto-generated constructor stub
