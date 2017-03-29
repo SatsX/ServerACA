@@ -36,7 +36,7 @@ public class DAOPost implements DAO<Post> {
 		Connection c = null;
 		PreparedStatement st = null;
 		ResultSet r = null;
-		Post a = new Post();
+		Post p = new Post();
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -45,12 +45,12 @@ public class DAOPost implements DAO<Post> {
 			r = st.executeQuery();
 			
 			if(r.next()){
-				a.setPostId(r.getInt("post_id"));
-				a.setContent(r.getString("content"));
-				a.setPostDate(r.getDate("post_date"));
-				a.setUserId(r.getInt("user_id"));
-				a.setChannelId(r.getInt("channel_id"));
-				return a;
+				p.setPostId(r.getInt("post_id"));
+				p.setContent(r.getString("content"));
+				p.setPostDate(r.getDate("post_date"));
+				p.setUserId(r.getInt("user_id"));
+				p.setChannelId(r.getInt("channel_id"));
+				return p;
 				
 			}else{
 				throw new DAOException("Error no post for this id.");
@@ -107,7 +107,7 @@ public class DAOPost implements DAO<Post> {
 		}
 	}
 
-	public void update(User obj) throws DAOException {
+	public void update(Post obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `post` SET `content` = ? "
 						+ "WHERE `post_id` = ? ;";

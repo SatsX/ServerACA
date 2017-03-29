@@ -88,7 +88,7 @@ public class Post {
 		this.channelId = channelId;
 	}
 	
-	public boolean compareTo(Post u){
+	public boolean compareTo(Post p){
 		if(this.postId == p.postId && this.content.compareTo(p.content) == 0) {
 			return true;
 		} else {

@@ -6,7 +6,7 @@ package cnam.tchat.aca.server.dao;
 import java.sql.Date;
 
 import cnam.tchat.aca.server.AppTest;
-import cnam.tchat.aca.server.io.User;
+import cnam.tchat.aca.server.io.Channel;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -15,13 +15,13 @@ import junit.framework.TestSuite;
  * @author arnold / adrien / cihat 
  *
  */
-public class DAOUserTest extends TestCase {
+public class DAOChannelTest extends TestCase {
 
 	/**
 	 * @param name
 	 */
 	
-	public DAOUserTest(String name) {
+	public DAOChannelTest(String name) {
 		super(name);
 		
 	}
@@ -39,32 +39,32 @@ public class DAOUserTest extends TestCase {
      */
     
     @SuppressWarnings("deprecation")
-	public void testDAOUser()
+	public void testDAOChannel()
     {
         try {
-			DAOUser d = new DAOUser();
-			User u = new User();
-			u.setUserId(1);
-			u.setUserName("toto");
+			DAOChannel d = new DAOChannel();
+			Channel ch = new Channel();
+			ch.setChannelId(1);
+			ch.setChannelName("Channel1");
 			//Test creation
-			d.create(u);
-			User u2;
-			u2 = d.find(1);
-			assertTrue(u.compareTo(u2));
+			d.create(ch);
+			Channel ch2;
+			ch2 = d.find(1);
+			assertTrue(ch.compareTo(ch2));
 			
 			//Test update
-			User u3 = new User();
-			u3.setUserId(1);
-			u3.setUserName("tata");
+			Channel ch3 = new Channel();
+			ch3.setChannelId(1);
+			ch3.setChannelName("Channel2.0");
 			
-			d.update(u3);
+			d.update(ch3);
 			
-			User u4;
-			u4 = d.find(1);
-			assertTrue(u3.compareTo(u4));
+			Channel ch4;
+			ch4 = d.find(1);
+			assertTrue(ch3.compareTo(ch4));
 
 			//Test delete
-			d.delete(u3);
+			d.delete(ch3);
 			
 			
 		} catch (DAOException e) {

@@ -10,33 +10,33 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import cnam.tchat.aca.server.io.User;
+import cnam.tchat.aca.server.io.Channel;
 
 /**
  * @authors Arnold / Adrien / Cihat
  *
  */
-public class DAOUser implements DAO<User> {
+public class DAOChannel implements DAO<Channel> {
 
-	private static final Logger LOG = Logger.getLogger(DAOUser.class.getName());
+	private static final Logger LOG = Logger.getLogger(DAOChannel.class.getName());
 	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "";
 	
-	public DAOUser() throws DAOException{
+	public DAOChannel() throws DAOException{
 		//useless
 	}
 
-	public User find(Object id) throws DAOException {
+	public Channel find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
 		
-		final String sql = "SELECT * FROM `user` WHERE `User_id` = ? ;";
+		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ? ;";
 		
 		Connection c = null;
 		PreparedStatement st = null;
 		ResultSet r = null;
-		User a = new User();
+		Channel ch = new Channel();
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -45,13 +45,13 @@ public class DAOUser implements DAO<User> {
 			r = st.executeQuery();
 			
 			if(r.next()){
-				a.setUserId(r.getInt("User_id"));
-				a.setUserName(r.getString("User_name"));
+				ch.setChannelId(r.getInt("channel_id"));
+				ch.setChannelName(r.getString("channel_name"));
 				
-				return a;
+				return ch;
 				
 			}else{
-				throw new DAOException("Error no user for this id.");
+				throw new DAOException("Error no channel for this id.");
 			}
 				
 		} catch (SQLException e){
@@ -71,8 +71,8 @@ public class DAOUser implements DAO<User> {
 		}
 	}
 
-	public void create(User obj) throws DAOException {
-		final String sql = "INSERT INTO `user` (`User_id`, `User_name`)"
+	public void create(Channel obj) throws DAOException {
+		final String sql = "INSERT INTO `channel` (`channel_id`, `channel_name`)"
 				+ " VALUES ( ? , ? ) ;";
 		
 		Connection c = null;
@@ -83,12 +83,12 @@ public class DAOUser implements DAO<User> {
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getUserId());
-			st.setString(2, obj.getUserName());
+			st.setInt(1, obj.getChannelId());
+			st.setString(2, obj.getChannelName());
 			r = st.executeUpdate();
 				
 		} catch (SQLException e){
-			throw new DAOException("Error in SQL engines during user creation.", e);
+			throw new DAOException("Error in SQL engines during channel creation.", e);
 		}finally{
 			try{
 				if(st != null)
@@ -102,10 +102,10 @@ public class DAOUser implements DAO<User> {
 		}
 	}
 
-	public void update(User obj) throws DAOException {
+	public void update(Channel obj) throws DAOException {
 		// TODO Auto-generated method stub
-				final String sql = "UPDATE `user` SET `User_name` = ? "
-						+ "WHERE `User_id` = ? ;";
+				final String sql = "UPDATE `channel` SET `channel_name` = ? "
+						+ "WHERE `channel_id` = ? ;";
 				
 				Connection c = null;
 				PreparedStatement st = null;
@@ -116,16 +116,16 @@ public class DAOUser implements DAO<User> {
 					// init connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
-					st.setString(1, obj.getUserName());
-					st.setInt(2, obj.getUserId());
+					st.setString(1, obj.getChannelName());
+					st.setInt(2, obj.getChannelId());
 					r = st.executeUpdate();
 					
 					// check modification		
 					if(r < 1){
-						throw new DAOException("No user was updated.");
+						throw new DAOException("No channel was updated.");
 					}
 				} catch (SQLException e){
-					throw new DAOException("Error in SQL engines during user updating.", e);
+					throw new DAOException("Error in SQL engines during channel updating.", e);
 				}finally{
 					try{
 						if(st != null)
@@ -139,8 +139,8 @@ public class DAOUser implements DAO<User> {
 				}
 	}
 
-	public void delete(User obj) throws DAOException {
-		final String sql = "DELETE FROM `user` WHERE `User_id` = ? ;";
+	public void delete(Channel obj) throws DAOException {
+		final String sql = "DELETE FROM `channel` WHERE `channel_id` = ? ;";
 		
 		Connection c = null;
 		PreparedStatement st = null;
@@ -149,15 +149,15 @@ public class DAOUser implements DAO<User> {
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getUserId());
+			st.setInt(1, obj.getChannelId());
 			r = st.executeUpdate();
 			
 			if(r < 1){
-				throw new DAOException("No user was deleted.");
+				throw new DAOException("No channel was deleted.");
 			}
 				
 		} catch (SQLException e){
-			throw new DAOException("Error in SQL engines during user deleting.", e);
+			throw new DAOException("Error in SQL engines during channel deleting.", e);
 		}finally{
 			try{
 				if(st != null)
