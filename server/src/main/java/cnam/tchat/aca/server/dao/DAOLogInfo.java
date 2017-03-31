@@ -23,7 +23,7 @@ public class DAOLogInfo implements DAO<LogInfo> {
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "";
 	
-	protected DAOLogInfo() throws DAOException{
+	public DAOLogInfo() throws DAOException{
 		//useless
 	}
 
