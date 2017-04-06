@@ -14,7 +14,7 @@ public class Post {
 
 	private int postId;
 	private String content;
-	private date postDate;
+	private Date postDate;
 	private int userId;
 	private int channelId;
 	
@@ -63,28 +63,28 @@ public class Post {
 	/**
 	 * @return the userId
 	 */
-	public Int getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(Int userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	
 	/**
 	 * @return the channelId
 	 */
-	public Int getChannelId() {
+	public int getChannelId() {
 		return channelId;
 	}
 
 	/**
 	 * @param channelId the ChannelId to set
 	 */
-	public void setChannelId(Int channelId) {
+	public void setChannelId(int channelId) {
 		this.channelId = channelId;
 	}
 	

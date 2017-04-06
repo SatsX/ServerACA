@@ -19,12 +19,14 @@ import cnam.tchat.aca.server.io.User;
 public class DAOUser implements DAO<User> {
 
 	private static final Logger LOG = Logger.getLogger(DAOUser.class.getName());
-	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "";
+	private static String URL;
+	private static String LOGIN;
+	private static String PASSWORD;
 	
-	public DAOUser() throws DAOException{
-		//useless
+	public DAOUser(String url, String login, String password) throws DAOException{
+		DAOUser.URL = url;
+		DAOUser.LOGIN = login;
+		DAOUser.PASSWORD = password;
 	}
 
 	public User find(Object id) throws DAOException {

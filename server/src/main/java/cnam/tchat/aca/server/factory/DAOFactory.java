@@ -16,20 +16,24 @@ import cnam.tchat.aca.server.dao.DAOUser;
  */
 public class DAOFactory {
 	
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
+	private static final String LOGIN = "root";
+	private static final String PASSWORD = "root";
+	
 	public static DAO getDAOUser() throws DAOException{
-		return new DAOUser();
+		return new DAOUser(URL, LOGIN, PASSWORD);
 	}
 	
 	public static DAO getDAOChannel() throws DAOException{
-		return new DAOChannel();
+		return new DAOChannel(URL, LOGIN, PASSWORD);
 	}
 	
 	public static DAO getDAOLogInfo() throws DAOException{
-		return new DAOLogInfo();
+		return new DAOLogInfo(URL, LOGIN, PASSWORD);
 	}
 	
 	public static DAO getDAOPost() throws DAOException{
-		return new DAOPost();
+		return new DAOPost(URL, LOGIN, PASSWORD);
 	}
 
 }

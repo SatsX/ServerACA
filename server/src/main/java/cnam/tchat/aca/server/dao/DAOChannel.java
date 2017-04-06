@@ -19,12 +19,14 @@ import cnam.tchat.aca.server.io.Channel;
 public class DAOChannel implements DAO<Channel> {
 
 	private static final Logger LOG = Logger.getLogger(DAOChannel.class.getName());
-	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "";
+	private static String URL;
+	private static String LOGIN;
+	private static String PASSWORD;
 	
-	public DAOChannel() throws DAOException{
-		//useless
+	public DAOChannel(String url, String login, String password) throws DAOException{
+		DAOChannel.URL = url;
+		DAOChannel.LOGIN = login;
+		DAOChannel.PASSWORD = password;
 	}
 
 	public Channel find(Object id) throws DAOException {

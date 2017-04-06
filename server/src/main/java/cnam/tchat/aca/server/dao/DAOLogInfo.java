@@ -19,12 +19,14 @@ import cnam.tchat.aca.server.io.LogInfo;
 public class DAOLogInfo implements DAO<LogInfo> {
 
 	private static final Logger LOG = Logger.getLogger(DAOLogInfo.class.getName());
-	private static final String URL = "jdbc:mysql://localhost:3306/cnam?useSSL=false";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "";
+	private static String URL;
+	private static String LOGIN;
+	private static String PASSWORD;
 	
-	public DAOLogInfo() throws DAOException{
-		//useless
+	public DAOLogInfo(String url, String login, String password) throws DAOException{
+		DAOLogInfo.URL = url;
+		DAOLogInfo.LOGIN = login;
+		DAOLogInfo.PASSWORD = password;
 	}
 
 	public LogInfo find(Object id) throws DAOException {
