@@ -21,6 +21,10 @@ public class DAOPostTest extends TestCase {
 	 * @param name
 	 */
 	
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
+	private static final String LOGIN = "root";
+	private static final String PASSWORD = "root";
+	
 	public DAOPostTest(String name) {
 		super(name);
 		
@@ -42,7 +46,7 @@ public class DAOPostTest extends TestCase {
 	public void testDAOPost()
     {
         try {
-			DAOPost d = new DAOPost();
+			DAOPost d = new DAOPost(URL, LOGIN, PASSWORD);
 			Post p = new Post();
 			p.setPostId(1);
 			p.setContent("Coucou enchanté");

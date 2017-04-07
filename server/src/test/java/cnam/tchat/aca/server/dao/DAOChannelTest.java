@@ -21,6 +21,10 @@ public class DAOChannelTest extends TestCase {
 	 * @param name
 	 */
 	
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
+	private static final String LOGIN = "root";
+	private static final String PASSWORD = "root";
+	
 	public DAOChannelTest(String name) {
 		super(name);
 		
@@ -42,7 +46,7 @@ public class DAOChannelTest extends TestCase {
 	public void testDAOChannel()
     {
         try {
-			DAOChannel d = new DAOChannel();
+			DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
 			Channel ch = new Channel();
 			ch.setChannelId(1);
 			ch.setChannelName("Channel1");

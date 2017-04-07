@@ -14,7 +14,7 @@ public class Post {
 
 	private int postId;
 	private String content;
-	private Date postDate;
+	private String postDate;
 	private int userId;
 	private int channelId;
 	
@@ -49,14 +49,14 @@ public class Post {
 	/**
 	 * @return the postDate
 	 */
-	public Date getPostDate() {
+	public String getPostDate() {
 		return postDate;
 	}
 
 	/**
 	 * @param postDate the postDate to set
 	 */
-	public void setPostDate(Date postDate) {
+	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}
 

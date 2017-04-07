@@ -21,6 +21,10 @@ public class DAOUserTest extends TestCase {
 	 * @param name
 	 */
 	
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
+	private static final String LOGIN = "root";
+	private static final String PASSWORD = "root";
+	
 	public DAOUserTest(String name) {
 		super(name);
 		
@@ -42,7 +46,7 @@ public class DAOUserTest extends TestCase {
 	public void testDAOUser()
     {
         try {
-			DAOUser d = new DAOUser();
+			DAOUser d = new DAOUser(URL, LOGIN, PASSWORD);
 			User u = new User();
 			u.setUserId(1);
 			u.setUserName("toto");
