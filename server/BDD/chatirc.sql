@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 05 Avril 2017 à 19:12
+-- Généré le :  Sam 08 Avril 2017 à 15:13
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -53,7 +53,8 @@ CREATE TABLE `post` (
 
 CREATE TABLE `user` (
   `User_id` int(11) NOT NULL,
-  `User_name` varchar(255) CHARACTER SET latin1 NOT NULL
+  `User_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `channel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -78,7 +79,8 @@ ALTER TABLE `post`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`User_id`);
+  ADD PRIMARY KEY (`User_id`),
+  ADD KEY `channel_id` (`channel_id`);
 
 --
 -- Contraintes pour les tables exportées
@@ -90,6 +92,12 @@ ALTER TABLE `user`
 ALTER TABLE `post`
   ADD CONSTRAINT `foreignkey_channel` FOREIGN KEY (`channel_id`) REFERENCES `channel` (`channel_id`),
   ADD CONSTRAINT `foreignkey_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_Channel` FOREIGN KEY (`channel_id`) REFERENCES `channel` (`channel_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
