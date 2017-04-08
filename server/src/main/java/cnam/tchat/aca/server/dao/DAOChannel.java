@@ -174,4 +174,111 @@ public class DAOChannel implements DAO<Channel> {
 		
 	}
 
+	public void ListAllChannel(Channel obj) throws DAOException {
+		final String sql = "SELECT * FROM `channel`;";
+		
+		Connection c = null;
+		PreparedStatement st = null;
+		int r = 0;
+		
+		
+		try{
+			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			st = c.prepareStatement(sql);
+			r = st.executeUpdate();
+			
+			if(r < 1){
+				throw new DAOException("No listing channel.");
+			}
+				
+		} catch (SQLException e){
+			throw new DAOException("Error in SQL engines during listing channel.", e);
+		}finally{
+			try{
+				if(st != null)
+					st.close();
+				if(c != null)
+					c.close();
+			}catch (SQLException e){
+				LOG.error("Error during closing open connections", e);
+				
+			}
+		}
+	}
+	
+	public void ListAllUser(Channel obj) throws DAOException {
+		final String sql = "SELECT * FROM `user`;";
+		
+		Connection c = null;
+		PreparedStatement st = null;
+		int r = 0;
+		
+		
+		try{
+			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			st = c.prepareStatement(sql);
+			r = st.executeUpdate();
+			
+			if(r < 1){
+				throw new DAOException("No listing users.");
+			}
+				
+		} catch (SQLException e){
+			throw new DAOException("Error in SQL engines during listing channel.", e);
+		}finally{
+			try{
+				if(st != null)
+					st.close();
+				if(c != null)
+					c.close();
+			}catch (SQLException e){
+				LOG.error("Error during closing open connections", e);
+				
+			}
+		}
+	}
+	
+	public Channel ListAllUserInChannel(Object id) throws DAOException {
+		if(!(id instanceof Integer))
+			throw new DAOException("ID not take in charge.");
+		
+		final String sql = "SELECT * FROM `user`, `channel` WHERE `user.channelId` = `channel.channelId` AND `channelId` = ? ;";
+		Connection c = null;
+		PreparedStatement st = null;
+		ResultSet r = null;
+		Channel ch = new Channel();
+		
+		try{
+			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			st = c.prepareStatement(sql);
+			st.setInt(1, (Integer) id);
+			r = st.executeQuery();
+			
+			if(r.next()){
+				ch.setUserName(r.getString("user_name"));
+				ch.setChannelName(r.getString("channel_name"));
+				
+				return ch;
+				
+			}else{
+				throw new DAOException("Error no channel for this id.");
+			}
+				
+		} catch (SQLException e){
+			throw new DAOException("Error in SQL engines during log information loading.", e);
+		}finally{
+			try{
+				if(r != null)
+					r.close();
+				if(st != null)
+					st.close();
+				if(c != null)
+					c.close();
+			}catch (SQLException e){
+				LOG.error("Error during closing open connections", e);
+				
+			}
+		}
+	}
+
 }

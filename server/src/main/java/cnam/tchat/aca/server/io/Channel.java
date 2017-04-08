@@ -6,6 +6,7 @@ import java.sql.Date;
 
 import cnam.tchat.aca.server.dao.DAOChannel;
 
+
 /**
  * @author Arnold / Adrien / Cihat
  *
@@ -14,6 +15,7 @@ public class Channel {
 
 	private int channelId;
 	private String channelName;
+	private String user_name;
 	
 	
 	/**
@@ -23,6 +25,7 @@ public class Channel {
 		return channelId;
 	}
 
+	
 	/**
 	 * @param channelId the channelId to set
 	 */
@@ -44,6 +47,19 @@ public class Channel {
 		this.channelName = channelName;
 	}
 
+	/**
+	 * @return the user_name
+	 */
+	public String getUserName() {
+		return user_name;
+	}
+
+	/**
+	 * @param user_name the user_name to set
+	 */
+	public void setUserName(String user_name) {
+		this.user_name = user_name;
+	}
 
 
 	
