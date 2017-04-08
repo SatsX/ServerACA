@@ -43,7 +43,7 @@ public class DAOUser implements DAO<User> {
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, (int) id);
+			st.setInt(1, (Integer) id);
 			r = st.executeQuery();
 			
 			if(r.next()){
