@@ -7,7 +7,7 @@ package cnam.tchat.aca.server.receive;
 import java.io.BufferedReader;
 
 /**
- * @author aronld
+ * @author arnold
  *
  */
 public class ReceiveProcess {

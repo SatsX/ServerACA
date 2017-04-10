@@ -8,32 +8,21 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
 
-
-/**
- * @author Arnold
- *
- */
 public class MainClient {
 	
-	//private static final Logger LOG = Logger.getLogger(MainClient.class.getName());
 	private static final String NICKNAME = "Erf...";
 	private static final int SERVER_PORT = 12345;
-	private static final String SERVER_HOST = "127.0.0.1";
-	/**
-	 * @throws ClientException 
-	 * 
-	 */
+	//private static final String SERVER_HOST = "";
+
+
 	
-	public static void runClient() throws ClientException{
+	public static void runClient() throws ClientException, IOException{
 		// TODO Auto-generated constructor stub
 		
-				//LOG.info("Init Client");
 				
 				Scanner sc = null;
 				Socket s = null;
@@ -45,54 +34,24 @@ public class MainClient {
 				PrintWriter pw = null;
 				sc = new Scanner(System.in);
 				
-				while(true){
-					try {
+				final String msg = sc.nextLine();
 						
-						final String msg = sc.nextLine();
+				s = new Socket("localhost", 12345);
+				out = s.getOutputStream();
+				osw = new OutputStreamWriter(out, "UTF-8");
+				bw = new BufferedWriter(osw);
 						
-						s = new Socket(InetAddress.getByName(SERVER_HOST), SERVER_PORT);
-						out = s.getOutputStream();
-						osw = new OutputStreamWriter(out, "UTF-8");
-						bw = new BufferedWriter(osw);
-						
-						bw.write(NICKNAME + " : " + msg);
-						bw.flush();
-						
-					} catch (IOException e) {
-						throw new ClientException("Error during message sending.", e);
-					} finally {
-						try{
-							if(bw != null)
-								bw.close();
-							if(osw != null)
-								osw.close();
-							if(out != null)
-								out.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-						try {
-							s.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
+				bw.write(NICKNAME + " : " + msg);
+				bw.flush();
 	}
+	
 	public MainClient() throws ClientException {
 		// Useless
 	}
 	
-	public static void main(String[] args) {
-		//LOG.info("Start client");
-		
-		try{
-			MainClient.runClient();
-			System.exit(0);
-		}catch (ClientException e){
-			//LOG.error("ERROR ON CLIENT");
-		}
+	public static void main(String[] args) throws ClientException, IOException {
+		System.out.println("Start client");
+			runClient();
 	}
-
 }
+

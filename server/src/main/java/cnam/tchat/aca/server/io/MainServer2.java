@@ -11,22 +11,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
-public class MainServer implements Runnable {
+public class MainServer2 {
 	public static final int SERVER_PORT = 12345;
-	public void run(Thread t){
-		try {
-			ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
-			processSocket(serverSocket.accept());
-			t.start();
-		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+	public static void main(String[] args) throws IOException, ServerException {
+		System.out.println("Start server on the port : " + SERVER_PORT + ".");
+		while(true){
+			run();
 		}
-
 		
+	}
+	
+	public static void run() throws ServerException, IOException{
+		ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+		processSocket(serverSocket.accept());
 	}
 		
 	private static void processSocket(Socket clientSocket) throws ServerException, IOException{
@@ -39,11 +37,6 @@ public class MainServer implements Runnable {
 		br = new BufferedReader(isr);
 		
 		System.out.println(br.readLine());
-	}
-
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

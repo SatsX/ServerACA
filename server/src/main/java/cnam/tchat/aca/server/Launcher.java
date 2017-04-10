@@ -1,6 +1,8 @@
 package cnam.tchat.aca.server;
 
-import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.net.ServerSocket;
 
 import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.ServerException;
@@ -10,23 +12,18 @@ import cnam.tchat.aca.server.io.ServerException;
  *
  */
 public class Launcher {
-
-	private static final Logger LOG = Logger.getLogger(Launcher.class.getName());
-	
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void Main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		MainServer server = new MainServer();
-		
-		LOG.info("Start server on the port : " + server.SERVER_PORT + ".");
-		try {
-			server.run();
-		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			LOG.error("ERROR on the server");
-		}
+		Thread t = new Thread();
+		System.out.println("Start server on the port : " + server.SERVER_PORT + ".");
+		server.run(t);
+
+
 	}
 
 }
