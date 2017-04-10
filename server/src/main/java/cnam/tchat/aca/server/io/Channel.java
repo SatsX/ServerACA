@@ -12,10 +12,11 @@ import cnam.tchat.aca.server.dao.DAOChannel;
  *
  */
 public class Channel {
-
+	
 	private int channelId;
 	private String channelName;
 	private String user_name;
+	
 	
 	
 	/**
@@ -71,6 +72,7 @@ public class Channel {
 		}
 	}
 
+	
 	public Channel() {
 		//Useless
 	}
