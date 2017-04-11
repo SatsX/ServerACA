@@ -12,18 +12,17 @@ import cnam.tchat.aca.server.io.ServerException;
  *
  */
 public class Launcher {
-	/**
-	 * @param args
-	 * @throws IOException 
-	 */
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		MainServer server = new MainServer();
-		Thread t = new Thread();
-		System.out.println("Start server on the port : " + server.SERVER_PORT + ".");
-		server.run(t);
 
 
+	public static void main(String[] args) {
+		Integer port;
+		MainServer mainServer;
+				
+		port = new Integer(12345);
+		
+		mainServer = new MainServer(port);
+		mainServer.start();
 	}
+
 
 }
