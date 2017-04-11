@@ -175,7 +175,7 @@ public class DAOChannel implements DAO<Channel> {
 	}
 	
 	public Channel listAllChannel(Object id) throws DAOException {
-		final String sql = "SELECT * FROM `channel`;";
+		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ?;";
 		Connection c = null;
 		PreparedStatement st = null;
 		ResultSet r = null;
@@ -296,6 +296,43 @@ public class DAOChannel implements DAO<Channel> {
 				
 			}
 		}
+	}
+
+	public void userJoinChannel(Channel obj) throws DAOException {
+		// TODO Auto-generated method stub
+				final String sql = "UPDATE `user` SET `User_id` = ? "
+						+ "WHERE `channel_id` = ? ;";
+				
+				Connection c = null;
+				PreparedStatement st = null;
+				int r = 0;
+				
+				
+				try{
+					// init connection
+					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+					st = c.prepareStatement(sql);
+					st.setInt(1, obj.getUser_id());
+					st.setInt(2, obj.getChannelId());
+					r = st.executeUpdate();
+					
+					// check modification		
+					if(r < 1){
+						throw new DAOException("No user was joined channel.");
+					}
+				} catch (SQLException e){
+					throw new DAOException("Error in SQL engines during user joined channel.", e);
+				}finally{
+					try{
+						if(st != null)
+							st.close();
+						if(c != null)
+							c.close();
+					}catch (SQLException e){
+						LOG.error("Error during closing open connections", e);
+						
+					}
+				}
 	}
 
 

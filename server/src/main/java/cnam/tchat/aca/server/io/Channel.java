@@ -19,6 +19,7 @@ public class Channel {
 	private int channelId;
 	private String channelName;
 	private String user_name;
+	private int user_id;
 	
 	
 	
@@ -64,6 +65,20 @@ public class Channel {
 	public void setUserName(String user_name) {
 		this.user_name = user_name;
 	}
+	
+	/**
+	 * @return the user_id
+	 */
+	public int getUser_id() {
+		return user_id;
+	}
+
+	/**
+	 * @param user_id the user_id to set
+	 */
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 
 
 	
@@ -83,24 +98,50 @@ public class Channel {
 		}
 	}
 	
-	public void ExistenceChannel() throws DAOException {
+	public void existenceChannel(Object id) throws DAOException {
+		if(!(id instanceof Integer))
+			throw new DAOException("ID not take in charge.");
+		
 		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
 		Channel ch = new Channel();
 		
-		ch.setChannelName(channelName);
+		ch.setChannelId(channelId);
 		Channel ch2;
 		//Listing channel
 		ch2 = d.listAllChannel(channelId);
 		//Check the existence of the channel and if their don't exist it will create it.
 		if(ch.compareTo(ch2)== false){
-			ch.setChannelId(channelId);
 			d.create(ch);
 		}
+	}
+	
+	public void userJoinChannel(Object id) throws DAOException {
+		if(!(id instanceof Integer))
+			throw new DAOException("ID not take in charge.");
+		
+		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
+		Channel ch = new Channel();
+		
+		ch.setChannelId(channelId);
+		Channel ch2;
+		//Listing channel
+		ch2 = d.listAllChannel(channelId);
+		//Check the existence of the channel and if their don't exist it will create it.
+		if(ch.compareTo(ch2)== false){
+			d.create(ch);
+			userJoinChannel(channelId);
+		}else {
+			userJoinChannel(channelId);
+		}
+		
 	}
 	
 	public Channel() throws DAOException {
 		//Useless
 		
 	}
+
+
+
 
 }
