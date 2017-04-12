@@ -115,7 +115,7 @@ public class Channel {
 		}
 	}
 	
-	public void userJoinChannel(Object id) throws DAOException {
+	public void joinChannel(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
 		
@@ -125,14 +125,24 @@ public class Channel {
 		ch.setChannelId(channelId);
 		Channel ch2;
 		//Listing channel
-		ch2 = d.listAllChannel(channelId);
-		//Check the existence of the channel and if their don't exist it will create it.
+		ch2 = d.listChannel(ch);
+		//Check the existence of the channel and if their don't exist it will be create it and the user too.
 		if(ch.compareTo(ch2)== false){
-			d.create(ch);
-			userJoinChannel(channelId);
+			d.create(ch2);
+			d.userJoinChannel(ch2);
 		}else {
-			userJoinChannel(channelId);
+			d.userJoinChannel(ch2);
 		}
+		
+	}
+
+	public void userInChannel(Object id) throws DAOException {
+		if(!(id instanceof Integer))
+			throw new DAOException("ID not take in charge.");
+		
+		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
+		
+		d.listAllUserInChannel(channelId);
 		
 	}
 	
