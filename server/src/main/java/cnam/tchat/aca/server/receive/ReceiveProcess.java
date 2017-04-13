@@ -1,101 +1,92 @@
 package cnam.tchat.aca.server.receive;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class ReceiveProcess extends JSONObject{
+public class ReceiveProcess extends JSONObject implements Runnable{
 
-	private String arguments; 
+	private HashMap<String, String> arguments = new HashMap<String, String>();
 	private String post;
+	private Socket so;
 	private ArrayList<String> channels;
 	private ArrayList<String> users;
 
-
-	public ReceiveProcess(String json) {
-		super(json);
-
-		try {
-			String arguments = this.getString("arguments");
-			String post = this.getString("post");
-			
-			this.setArguments(arguments);
-			this.setPost(post);
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	public ReceiveProcess(Socket cs) {		
+		so = cs;		
 
 	}
 
-
-	/**
-	 * @return the nickname
-	 */
 	public String getArguments() {
-		return this.arguments;
+		return this.arguments.get("USERS");
 	}
 
-
-	/**
-	 * @return the post
-	 */
 	public String getPost() {
 		return this.post;
 	}
-
-
-	/**
-	 * @return the channels
-	 */
+	
 	public ArrayList<String> getChannels() {
 		return this.channels;
 	}
 
 
-	/**
-	 * @return the users
-	 */
 	public ArrayList<String> getUsers() {
 		return this.users;
 	}
 
 
-	/**
-	 * @param nickname the nickname to set
-	 */
-	private void setArguments(String arguments) {
-		this.arguments = arguments;
+
+	public void Cancel() throws IOException{
+		so.close();
 	}
 
-
-	/**
-	 * @param post the post to set
-	 */
-	private void setPost(String post) {
-		this.post = post;
-	}
-
-
-	/**
-	 * @param channels the channels to set
-	 */
-	private void setChannels(ArrayList<String> channels) {
-		this.channels = channels;
-	}
-
-
-	/**
-	 * @param users the users to set
-	 */
-	private void setUsers(ArrayList<String> users) {
-		this.users = users;
-	}
-
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return true;
+	public void run() {
+		
+		while(so.isConnected()){
+			
+	       try {
+	    	   	InputStream in = null;
+				InputStreamReader isr = null;
+				BufferedReader br = null;
+				OutputStream out = null;
+				OutputStreamWriter osw = null;
+				BufferedWriter bw = null;
+				
+				in = so.getInputStream();
+				isr = new InputStreamReader(in, "UTF-8");
+				br = new BufferedReader(isr);
+				
+				out = so.getOutputStream();
+				osw = new OutputStreamWriter(out, "UTF-8");
+				bw = new BufferedWriter(osw);
+			
+				String line = br.readLine();
+				System.out.println(line);
+				
+				bw.write(line);
+				bw.newLine();
+				bw.flush();
+				
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}   
+		}
+		
+		
 	}
 }

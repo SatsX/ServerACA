@@ -1,11 +1,6 @@
 package cnam.tchat.aca.server;
 
-
-import java.io.IOException;
-import java.net.ServerSocket;
-
 import cnam.tchat.aca.server.io.MainServer;
-import cnam.tchat.aca.server.io.ServerException;
 
 /**
  * @author Cihat
@@ -21,7 +16,7 @@ public class Launcher {
 		port = new Integer(12345);
 		
 		mainServer = new MainServer(port);
-		mainServer.start();
+		mainServer.run();
 	}
 
 

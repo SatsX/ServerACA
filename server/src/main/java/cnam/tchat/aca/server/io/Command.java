@@ -25,7 +25,7 @@ public class Command {
 	}
 
 	
-	private static void KIK(String arguments) {
+	private static void KICK(String arguments) {
 		// TODO Auto-generated method stub
 		
 	}
