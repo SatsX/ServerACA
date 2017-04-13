@@ -1,4 +1,4 @@
-package cnam.tchat.aca.server.receive;
+package cnam.tchat.aca.server.messageProcess;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

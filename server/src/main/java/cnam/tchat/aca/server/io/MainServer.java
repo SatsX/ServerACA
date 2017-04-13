@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-import cnam.tchat.aca.server.receive.ReceiveProcess;
+import cnam.tchat.aca.server.messageProcess.ReceiveProcess;
 
 
 public class MainServer implements Runnable{
