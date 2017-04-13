@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import cnam.tchat.aca.server.io.Channel;
 
 /**
- * @authors Arnold / Adrien / Cihat
+* @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOChannel implements DAO<Channel> {
@@ -28,7 +28,7 @@ public class DAOChannel implements DAO<Channel> {
 		DAOChannel.LOGIN = login;
 		DAOChannel.PASSWORD = password;
 	}
-
+	//Find the post
 	public Channel find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -72,7 +72,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-
+	//Create a post
 	public void create(Channel obj) throws DAOException {
 		final String sql = "INSERT INTO `channel` (`channel_id`, `channel_name`)"
 				+ " VALUES ( ? , ? ) ;";
@@ -103,7 +103,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-
+	//Update a post
 	public void update(Channel obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `channel` SET `channel_name` = ? "
@@ -140,7 +140,7 @@ public class DAOChannel implements DAO<Channel> {
 					}
 				}
 	}
-
+	//Delete a post
 	public void delete(Channel obj) throws DAOException {
 		final String sql = "DELETE FROM `channel` WHERE `channel_id` = ? ;";
 		
@@ -173,7 +173,7 @@ public class DAOChannel implements DAO<Channel> {
 		}
 		
 	}
-	
+	//List all the channel
 	public Channel listAllChannel(Object id) throws DAOException {
 		final String sql = "SELECT * FROM `channel`;";
 		Connection c = null;
@@ -211,7 +211,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-	
+	//Return the channel select
 	public Channel listChannel(Object id) throws DAOException {
 		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ?;";
 		Connection c = null;
@@ -252,7 +252,7 @@ public class DAOChannel implements DAO<Channel> {
 		}
 	}
 	
-	
+	//List all user
 	public Channel listAllUser(Object id) throws DAOException {
 		final String sql = "SELECT * FROM `user`;";
 		
@@ -293,7 +293,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-	
+	//List all users in the channel pick
 	public Channel listAllUserInChannel(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -336,7 +336,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-
+	//Update the channel use by an existing user
 	public void userJoinChannel(Channel obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `user` SET `User_id` = ? "

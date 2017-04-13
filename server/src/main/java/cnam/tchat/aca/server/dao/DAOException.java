@@ -4,7 +4,7 @@
 package cnam.tchat.aca.server.dao;
 
 /**
- * @authors Arnold / Adrien / Cihat
+* @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOException extends Exception {

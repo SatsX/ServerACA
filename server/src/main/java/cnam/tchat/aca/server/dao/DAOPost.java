@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import cnam.tchat.aca.server.io.Post;
 
 /**
- * @authors Arnold / Adrien / Cihat
+* @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOPost implements DAO<Post> {
@@ -28,7 +28,7 @@ public class DAOPost implements DAO<Post> {
 		DAOPost.LOGIN = login;
 		DAOPost.PASSWORD = password;
 	}
-
+	//Find the post
 	public Post find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -74,7 +74,7 @@ public class DAOPost implements DAO<Post> {
 			}
 		}
 	}
-
+	//Create new Post
 	public void create(Post obj) throws DAOException {
 		final String sql = "INSERT INTO `post` (`post_id`, `content`, `post_date`, `user_id`, `channel_id`)"
 				+ " VALUES ( ? , ? , ? , ? , ? ) ;";
@@ -108,7 +108,7 @@ public class DAOPost implements DAO<Post> {
 			}
 		}
 	}
-
+	//Update a post
 	public void update(Post obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `post` SET `content` = ? "
@@ -145,7 +145,7 @@ public class DAOPost implements DAO<Post> {
 					}
 				}
 	}
-
+	//Delete a post
 	public void delete(Post obj) throws DAOException {
 		final String sql = "DELETE FROM `post` WHERE `post_id` = ? ;";
 		

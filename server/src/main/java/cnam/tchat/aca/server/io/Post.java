@@ -7,7 +7,7 @@ import java.sql.Date;
 import cnam.tchat.aca.server.dao.DAOPost;
 
 /**
- * @author Arnold / Adrien / Cihat
+* @authors Adrien / Cihat / Arnold
  *
  */
 public class Post {

@@ -9,7 +9,7 @@ import cnam.tchat.aca.server.dao.DAOException;
 
 
 /**
- * @author Arnold / Adrien / Cihat
+ * @authors Adrien / Cihat / Arnold
  *
  */
 public class Channel {

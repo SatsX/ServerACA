@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @authors Arnold / Adrien / Cihat
+ * @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOUser implements DAO<User> {
@@ -28,7 +28,7 @@ public class DAOUser implements DAO<User> {
 		DAOUser.LOGIN = login;
 		DAOUser.PASSWORD = password;
 	}
-
+	// Find the user.
 	public User find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -72,7 +72,7 @@ public class DAOUser implements DAO<User> {
 			}
 		}
 	}
-
+	//Create user
 	public void create(User obj) throws DAOException {
 		final String sql = "INSERT INTO `user` (`User_id`, `User_name`)"
 				+ " VALUES ( ? , ? ) ;";
@@ -103,7 +103,7 @@ public class DAOUser implements DAO<User> {
 			}
 		}
 	}
-
+	//Update user
 	public void update(User obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `user` SET `User_name` = ? "
@@ -140,7 +140,7 @@ public class DAOUser implements DAO<User> {
 					}
 				}
 	}
-
+	//Delete user.
 	public void delete(User obj) throws DAOException {
 		final String sql = "DELETE FROM `user` WHERE `User_id` = ? ;";
 		

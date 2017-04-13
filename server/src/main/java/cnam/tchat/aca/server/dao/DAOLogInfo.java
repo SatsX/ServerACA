@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import cnam.tchat.aca.server.io.LogInfo;
 
 /**
- * @authors Arnold / Adrien / Cihat
+* @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOLogInfo implements DAO<LogInfo> {
