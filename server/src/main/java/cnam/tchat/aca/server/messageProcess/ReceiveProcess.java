@@ -15,38 +15,36 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class ReceiveProcess extends JSONObject implements Runnable{
-
-	private HashMap<String, String> arguments = new HashMap<String, String>();
-	private String post;
+public class ReceiveProcess implements Runnable{
+	// Read
+	private InputStream in = null;
+	private InputStreamReader isr = null;
+	private BufferedReader br = null;
+	private OutputStream out = null;
+	private OutputStreamWriter osw = null;
+	private BufferedWriter bw = null;
 	private Socket so;
-	private ArrayList<String> channels;
-	private ArrayList<String> users;
 
 	public ReceiveProcess(Socket cs) {		
 		so = cs;		
-
 	}
 
-	public String getArguments() {
-		return this.arguments.get("USERS");
+	public String read() throws IOException{
+		String msg = null;
+		
+		while (msg == null) {
+			try {
+				// We recover the message send to us by the server
+				msg = br.readLine();
+				System.out.println("Reading : " + msg);
+			} catch (IOException e){
+				System.err.println("Error during reading line");
+				e.printStackTrace();
+			}
+		}
+		return msg;
 	}
-
-	public String getPost() {
-		return this.post;
-	}
-	
-	public ArrayList<String> getChannels() {
-		return this.channels;
-	}
-
-
-	public ArrayList<String> getUsers() {
-		return this.users;
-	}
-
-
-
+		
 	public void Cancel() throws IOException{
 		so.close();
 	}
@@ -54,39 +52,26 @@ public class ReceiveProcess extends JSONObject implements Runnable{
 	public void run() {
 		
 		while(so.isConnected()){
-			
-	       try {
-	    	   	InputStream in = null;
-				InputStreamReader isr = null;
-				BufferedReader br = null;
-				OutputStream out = null;
-				OutputStreamWriter osw = null;
-				BufferedWriter bw = null;
-				
+	   		try {
 				in = so.getInputStream();
 				isr = new InputStreamReader(in, "UTF-8");
-				br = new BufferedReader(isr);
-				
-				out = so.getOutputStream();
-				osw = new OutputStreamWriter(out, "UTF-8");
-				bw = new BufferedWriter(osw);
-			
-				String line = br.readLine();
-				System.out.println(line);
-				
-				bw.write(line);
-				bw.newLine();
-				bw.flush();
-				
-				
-			} catch (JSONException e) {
-				e.printStackTrace();
+		   		br = new BufferedReader(isr);
+		   		while(true){
+			   		String msgToClient = this.read();
+			   		out = so.getOutputStream();
+					osw = new OutputStreamWriter(out, "UTF-8");
+					bw = new BufferedWriter(osw);
+					
+					System.out.println("Writing : " + msgToClient);
+					bw.write(msgToClient);
+					bw.newLine();
+					bw.flush();
+		   		}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}   
-		}
-		
-		
+			}
+	   		  		
+	   		}
 	}
 }
