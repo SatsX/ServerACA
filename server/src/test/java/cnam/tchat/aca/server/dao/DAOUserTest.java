@@ -6,6 +6,7 @@ package cnam.tchat.aca.server.dao;
 import java.sql.Date;
 
 import cnam.tchat.aca.server.AppTest;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.User;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -30,13 +31,6 @@ public class DAOUserTest extends TestCase {
 		
 	}
 	
-	/**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
     
     /**
      * Rigourous Test :-)
@@ -46,7 +40,7 @@ public class DAOUserTest extends TestCase {
 	public void testDAOUser()
     {
         try {
-			DAOUser d = new DAOUser(URL, LOGIN, PASSWORD);
+			DAOUser d = (DAOUser) DAOFactory.getDAOUser();
 			User u = new User();
 			u.setUserId(1);
 			u.setUserName("toto");

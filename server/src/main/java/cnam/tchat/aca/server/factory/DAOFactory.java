@@ -16,7 +16,7 @@ import cnam.tchat.aca.server.dao.DAOUser;
  */
 public class DAOFactory {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/chatirc";
+	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "root";
 	
