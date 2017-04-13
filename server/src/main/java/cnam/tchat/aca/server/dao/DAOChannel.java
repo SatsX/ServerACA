@@ -175,7 +175,7 @@ public class DAOChannel implements DAO<Channel> {
 	}
 	
 	public Channel listAllChannel(Object id) throws DAOException {
-		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ?;";
+		final String sql = "SELECT * FROM `channel`;";
 		Connection c = null;
 		PreparedStatement st = null;
 		ResultSet r = null;
@@ -184,11 +184,9 @@ public class DAOChannel implements DAO<Channel> {
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, (Integer) id);
 			r = st.executeQuery();
 			
 			if(r.next()){
-				ch.setUserName(r.getString("user_name"));
 				ch.setChannelName(r.getString("channel_name"));
 				
 				return ch;
@@ -213,6 +211,47 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
+	
+	public Channel listChannel(Object id) throws DAOException {
+		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ?;";
+		Connection c = null;
+		PreparedStatement st = null;
+		ResultSet r = null;
+		Channel ch = new Channel();
+		
+		try{
+			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			st = c.prepareStatement(sql);
+			st.setInt(1, (Integer) id);
+			r = st.executeQuery();
+			
+			if(r.next()){
+				ch.setChannelId(r.getInt("channel_id"));
+				ch.setChannelName(r.getString("channel_name"));
+				
+				return ch;
+				
+			}else{
+				throw new DAOException("Error no channel for this id.");
+			}
+				
+		} catch (SQLException e){
+			throw new DAOException("Error in SQL engines during log information loading.", e);
+		}finally{
+			try{
+				if(r != null)
+					r.close();
+				if(st != null)
+					st.close();
+				if(c != null)
+					c.close();
+			}catch (SQLException e){
+				LOG.error("Error during closing open connections", e);
+				
+			}
+		}
+	}
+	
 	
 	public Channel listAllUser(Object id) throws DAOException {
 		final String sql = "SELECT * FROM `user`;";
