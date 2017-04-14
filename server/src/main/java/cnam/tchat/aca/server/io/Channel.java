@@ -3,8 +3,11 @@
  */
 package cnam.tchat.aca.server.io;
 
+import java.util.ArrayList;
+
 import cnam.tchat.aca.server.dao.DAOChannel;
 import cnam.tchat.aca.server.dao.DAOException;
+import cnam.tchat.aca.server.factory.DAOFactory;
 
 
 /**
@@ -12,14 +15,10 @@ import cnam.tchat.aca.server.dao.DAOException;
  *
  */
 public class Channel {
-	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "root";
+	
 	private int channelId;
 	private String channelName;
-	private String user_name;
-	private int user_id;
-	
+	private ArrayList<User> lUser;
 	
 	
 	/**
@@ -52,33 +51,19 @@ public class Channel {
 	}
 
 	/**
-	 * @return the user_name
+	 * @return the lUser
 	 */
-	public String getUserName() {
-		return user_name;
+	public ArrayList<User> getlUser() {
+		return lUser;
 	}
 
-	/**
-	 * @param user_name the user_name to set
-	 */
-	public void setUserName(String user_name) {
-		this.user_name = user_name;
-	}
-	
-	/**
-	 * @return the user_id
-	 */
-	public int getUser_id() {
-		return user_id;
-	}
 
 	/**
-	 * @param user_id the user_id to set
+	 * @param lUser the lUser to set
 	 */
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setlUser(ArrayList<User> lUser) {
+		this.lUser = lUser;
 	}
-
 
 	
 	public boolean compareTo(Channel ch){
@@ -97,60 +82,21 @@ public class Channel {
 		}
 	}
 	
-	public void existenceChannel(Object id) throws DAOException {
-		if(!(id instanceof Integer))
-			throw new DAOException("ID not take in charge.");
-		
-		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
-		Channel ch = new Channel();
-		
-		ch.setChannelId(channelId);
-		Channel ch2;
+	public boolean existenceChannel(String name) throws DAOException {
+		DAOChannel d = (DAOChannel) DAOFactory.getDAOChannel();
+		//Create list channel
+		ArrayList<Channel> lch; 
 		//Listing channel
-		ch2 = d.listAllChannel(channelId);
-		//Check the existence of the channel and if their don't exist it will create it.
-		if(ch.compareTo(ch2)== false){
-			d.create(ch);
+		lch = d.listAllChannel();
+		//Check existence of the channel
+		for (Channel tmp : lch){
+			if(tmp.getChannelName().equals(name)){
+				return true;
+			}
 		}
-	}
-	
-	public void joinChannel(Object id) throws DAOException {
-		if(!(id instanceof Integer))
-			throw new DAOException("ID not take in charge.");
-		
-		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
-		Channel ch = new Channel();
-		
-		ch.setChannelId(channelId);
-		Channel ch2;
-		//Listing channel
-		ch2 = d.listChannel(ch);
-		//Check the existence of the channel and if their don't exist it will be create it and the user too.
-		if(ch.compareTo(ch2)== false){
-			d.create(ch2);
-			d.userJoinChannel(ch2);
-		}else {
-			d.userJoinChannel(ch2);
-		}
-		
-	}
-
-	public void userInChannel(Object id) throws DAOException {
-		if(!(id instanceof Integer))
-			throw new DAOException("ID not take in charge.");
-		
-		DAOChannel d = new DAOChannel(URL, LOGIN, PASSWORD);
-		
-		d.listAllUserInChannel(channelId);
-		
+		return false;
 	}
 	
 	public Channel() throws DAOException {
-		//Useless
-		
 	}
-
-
-
-
 }
