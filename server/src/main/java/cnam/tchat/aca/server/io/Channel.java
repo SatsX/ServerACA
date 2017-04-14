@@ -18,6 +18,7 @@ public class Channel {
 	
 	private int channelId;
 	private String channelName;
+	// List user
 	private ArrayList<User> lUser;
 	
 	
@@ -73,14 +74,7 @@ public class Channel {
 			return false;
 		}
 	}
-	
-	public boolean checkExistence(Channel ch){
-		if(this.channelName == ch.channelName) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 	
 	public boolean existenceChannel(String name) throws DAOException {
 		DAOChannel d = (DAOChannel) DAOFactory.getDAOChannel();
@@ -98,5 +92,6 @@ public class Channel {
 	}
 	
 	public Channel() throws DAOException {
+		
 	}
 }

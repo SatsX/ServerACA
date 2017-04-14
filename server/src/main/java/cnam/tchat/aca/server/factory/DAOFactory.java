@@ -19,15 +19,15 @@ import cnam.tchat.aca.server.io.User;
  *
  */
 public class DAOFactory {
-	
+	//connection bdd
 	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "root";
-	
+	// Instance DAOUser
 	public static DAO<User> getDAOUser() throws DAOException{
 		return new DAOUser(URL, LOGIN, PASSWORD);
 	}
-	
+	// Instance DAOChannel
 	public static DAO<Channel> getDAOChannel() throws DAOException{
 		return new DAOChannel(URL, LOGIN, PASSWORD);
 	}

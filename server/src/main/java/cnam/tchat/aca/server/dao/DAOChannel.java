@@ -43,6 +43,7 @@ public class DAOChannel implements DAO<Channel> {
 		Channel ch = new Channel();
 		
 		try{
+			// init connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, (Integer) id);
@@ -84,6 +85,7 @@ public class DAOChannel implements DAO<Channel> {
 		int r = 0;		
 		
 		try{
+			// init connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getChannelId());
@@ -106,7 +108,6 @@ public class DAOChannel implements DAO<Channel> {
 	}
 	//Update a channel
 	public void update(Channel obj) throws DAOException {
-		// TODO Auto-generated method stub
 				final String sql = "UPDATE `channel` SET `channel_name` = ? "
 						+ "WHERE `channel_id` = ? ;";
 				
@@ -150,6 +151,7 @@ public class DAOChannel implements DAO<Channel> {
 		int r = 0;
 		
 		try{
+			// init connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getChannelId());
@@ -183,6 +185,7 @@ public class DAOChannel implements DAO<Channel> {
 		ResultSet r = null;
 		
 		try{
+			// init connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			r = st.executeQuery();

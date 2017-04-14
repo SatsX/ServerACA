@@ -110,7 +110,6 @@ public class DAOPost implements DAO<Post> {
 	}
 	//Update a post
 	public void update(Post obj) throws DAOException {
-		// TODO Auto-generated method stub
 				final String sql = "UPDATE `post` SET `content` = ? "
 						+ "WHERE `post_id` = ? ;";
 				
@@ -154,6 +153,7 @@ public class DAOPost implements DAO<Post> {
 		int r = 0;
 		
 		try{
+			// init connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getPostId());
@@ -178,5 +178,4 @@ public class DAOPost implements DAO<Post> {
 		}
 		
 	}
-
 }
