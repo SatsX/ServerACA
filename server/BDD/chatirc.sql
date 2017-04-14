@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 08 Avril 2017 à 15:13
+-- Généré le :  Ven 14 Avril 2017 à 08:53
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -31,6 +31,13 @@ CREATE TABLE `channel` (
   `channel_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `channel`
+--
+
+INSERT INTO `channel` (`channel_id`, `channel_name`) VALUES
+(1, 'Channel1');
+
 -- --------------------------------------------------------
 
 --
@@ -40,7 +47,7 @@ CREATE TABLE `channel` (
 CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `content` varchar(20000) NOT NULL,
-  `post_date` date NOT NULL,
+  `post_date` varchar(25) NOT NULL,
   `user_id` int(11) NOT NULL,
   `channel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -56,6 +63,13 @@ CREATE TABLE `user` (
   `User_name` varchar(255) CHARACTER SET latin1 NOT NULL,
   `channel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`User_id`, `User_name`, `channel_id`) VALUES
+(1, 'Satallica', 1);
 
 --
 -- Index pour les tables exportées

@@ -2,7 +2,6 @@
  * 
  */
 package cnam.tchat.aca.server.io;
-import java.sql.Date;
 
 import cnam.tchat.aca.server.dao.DAOChannel;
 import cnam.tchat.aca.server.dao.DAOException;
@@ -15,7 +14,7 @@ import cnam.tchat.aca.server.dao.DAOException;
 public class Channel {
 	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
 	private static final String LOGIN = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "root";
 	private int channelId;
 	private String channelName;
 	private String user_name;

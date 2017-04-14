@@ -42,27 +42,27 @@ public class DAOUserTest extends TestCase {
         try {
 			DAOUser d = (DAOUser) DAOFactory.getDAOUser();
 			User u = new User();
-			u.setUserId(1);
+			u.setUserId(2);
 			u.setUserName("toto");
 			//Test creation
 			d.create(u);
 			User u2;
-			u2 = d.find(1);
-//			assertTrue(u.compareTo(u2));
-//			
-//			//Test update
-//			User u3 = new User();
-//			u3.setUserId(1);
-//			u3.setUserName("tata");
-//			
-//			d.update(u3);
-//			
-//			User u4;
-//			u4 = d.find(1);
-//			assertTrue(u3.compareTo(u4));
-//
-//			//Test delete
-//			//d.delete(u3);
+			u2 = d.find(2);
+			assertTrue(u.compareTo(u2));
+			
+			//Test update
+			User u3 = new User();
+			u3.setUserId(2);
+			u3.setUserName("Toutou");
+			
+			d.update(u3);
+			
+			User u4;
+			u4 = d.find(2);
+			assertTrue(u3.compareTo(u4));
+
+			//Test delete
+			d.delete(u4);
 			
 			
 		} catch (DAOException e) {
