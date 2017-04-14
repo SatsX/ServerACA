@@ -42,7 +42,7 @@ public class DAOUser implements DAO<User> {
 		User a = new User();
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, (Integer) id);
@@ -81,16 +81,14 @@ public class DAOUser implements DAO<User> {
 		
 		Connection c = null;
 		PreparedStatement st = null;
-		int r = 0;
-		
-		
+				
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getUserId());
 			st.setString(2, obj.getUserName());
-			r = st.executeUpdate();
+			st.executeUpdate();
 				
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during user creation.", e);
@@ -117,7 +115,7 @@ public class DAOUser implements DAO<User> {
 				
 				
 				try{
-					// init connection
+					// initialize connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getUserName());
@@ -151,7 +149,7 @@ public class DAOUser implements DAO<User> {
 		int r = 0;
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getUserId());
@@ -183,7 +181,7 @@ public class DAOUser implements DAO<User> {
 		ResultSet r = null;
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			r = st.executeQuery();
@@ -193,7 +191,7 @@ public class DAOUser implements DAO<User> {
 			while(r.next()){
 				// Create a user
 				User ch = new User();
-				// Recuperate all fields
+				// recover all fields
 				ch.setUserId(r.getInt("User_id"));
 				ch.setUserName(r.getString("User_name"));
 				// Add the user to the list

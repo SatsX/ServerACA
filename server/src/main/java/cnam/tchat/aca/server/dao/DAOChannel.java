@@ -43,7 +43,7 @@ public class DAOChannel implements DAO<Channel> {
 		Channel ch = new Channel();
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, (Integer) id);
@@ -81,16 +81,15 @@ public class DAOChannel implements DAO<Channel> {
 				+ " VALUES ( ? , ? ) ;";
 		
 		Connection c = null;
-		PreparedStatement st = null;
-		int r = 0;		
+		PreparedStatement st = null;	
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getChannelId());
 			st.setString(2, obj.getChannelName());
-			r = st.executeUpdate();
+			st.executeUpdate();
 				
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during channel creation.", e);
@@ -101,8 +100,7 @@ public class DAOChannel implements DAO<Channel> {
 				if(c != null)
 					c.close();
 			}catch (SQLException e){
-				LOG.error("Error during closing open connections");
-				
+				LOG.error("Error during closing open connections");	
 			}
 		}
 	}
@@ -117,7 +115,7 @@ public class DAOChannel implements DAO<Channel> {
 				
 				
 				try{
-					// init connection
+					// initialize connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getChannelName());
@@ -151,7 +149,7 @@ public class DAOChannel implements DAO<Channel> {
 		int r = 0;
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getChannelId());
@@ -185,7 +183,7 @@ public class DAOChannel implements DAO<Channel> {
 		ResultSet r = null;
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			r = st.executeQuery();
@@ -219,8 +217,4 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-	
-			
-
-
 }

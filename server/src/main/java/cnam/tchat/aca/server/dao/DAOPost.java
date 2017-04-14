@@ -80,9 +80,7 @@ public class DAOPost implements DAO<Post> {
 				+ " VALUES ( ? , ? , ? , ? , ? ) ;";
 		
 		Connection c = null;
-		PreparedStatement st = null;
-		int r = 0;
-		
+		PreparedStatement st = null;		
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -92,7 +90,7 @@ public class DAOPost implements DAO<Post> {
 			st.setString(3, obj.getPostDate());
 			st.setInt(4, obj.getUserId());
 			st.setInt(5, obj.getChannelId());
-			r = st.executeUpdate();
+			st.executeUpdate();
 				
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during post creation.", e);
@@ -104,7 +102,6 @@ public class DAOPost implements DAO<Post> {
 					c.close();
 			}catch (SQLException e){
 				LOG.error("Error during closing open connections");
-				
 			}
 		}
 	}
@@ -119,7 +116,7 @@ public class DAOPost implements DAO<Post> {
 				
 				
 				try{
-					// init connection
+					// initialize connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getContent());
@@ -153,7 +150,7 @@ public class DAOPost implements DAO<Post> {
 		int r = 0;
 		
 		try{
-			// init connection
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getPostId());
