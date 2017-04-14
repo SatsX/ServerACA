@@ -46,6 +46,8 @@ public class MainServer implements Runnable{
 				System.err.println("[ERROR] : Failed to accept requests on main socket.");
 				e.printStackTrace();
 			
+			} finally {
+				// close connection
 			}
 		}
 	}
