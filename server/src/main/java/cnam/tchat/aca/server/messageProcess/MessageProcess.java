@@ -97,6 +97,9 @@ public class MessageProcess implements Runnable{
 		   		br = new BufferedReader(isr);
 		   		while(true){
 			   		String msgToClient = this.read();
+					if(msgToClient == null){
+						break;
+					}
 			   		out = so.getOutputStream();
 					osw = new OutputStreamWriter(out, "UTF-8");
 					bw = new BufferedWriter(osw);
