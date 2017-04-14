@@ -12,6 +12,11 @@ public class ServerException extends Exception {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 	public ServerException() {
 		// TODO Auto-generated constructor stub
 	}
