@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -171,7 +172,48 @@ public class DAOUser implements DAO<User> {
 				
 			}
 		}
-		
 	}
+	//List all users 
+	public ArrayList<User> listAllUser() throws DAOException {
+		final String sql = "SELECT * FROM `user`;";
+		Connection c = null;
+		PreparedStatement st = null;
+		ResultSet r = null;
+		
+		try{
+			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+			st = c.prepareStatement(sql);
+			r = st.executeQuery();
+			// Create a list of user
+			ArrayList<User> l = new ArrayList<User>();
+			
+			while(r.next()){
+				// Create a user
+				User ch = new User();
+				// Recuperate all fields
+				ch.setUserId(r.getInt("User_id"));
+				ch.setUserName(r.getString("User_name"));
+				// Add the user to the list
+				l.add(ch);
+			}
+			// Return the list
+			return l;	
+		} catch (SQLException e){
+			throw new DAOException("Error in SQL engines during log information loading.", e);
+		}finally{
+			try{
+				if(r != null)
+					r.close();
+				if(st != null)
+					st.close();
+				if(c != null)
+					c.close();
+			}catch (SQLException e){
+				LOG.error("Error during closing open connections", e);
+				
+			}
+		}
+	}		
+
 
 }
