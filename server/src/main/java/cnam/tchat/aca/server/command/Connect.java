@@ -26,9 +26,11 @@ public class Connect extends Command {
 	 * @see cnam.tchat.aca.server.command.Command#takeDecision()
 	 */
 	@Override
-	public JSONObject takeDecision() {
-		// TODO Auto-generated method stub
-		return null;
+	public String takeDecision() {
+		JSONObject jsonMessage = new JSONObject();
+		jsonMessage.put("nickname", "server");
+		jsonMessage.put("post", "You are connected to server : " + parameters.getString(0) + " as " + parameters.getString(1));
+		return jsonMessage.toString();
 	}
 
 }

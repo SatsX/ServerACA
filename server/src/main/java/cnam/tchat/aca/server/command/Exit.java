@@ -22,9 +22,11 @@ public class Exit extends Command {
 	 * @see cnam.tchat.aca.server.command.Command#takeDecision()
 	 */
 	@Override
-	public JSONObject takeDecision() {
-		// TODO Auto-generated method stub
-		return null;
+	public String takeDecision() {
+		JSONObject jsonMessage = new JSONObject();
+		jsonMessage.put("nickname", "server");
+		jsonMessage.put("post", "You have left server, bye...");
+		return jsonMessage.toString();
 	}
 
 }

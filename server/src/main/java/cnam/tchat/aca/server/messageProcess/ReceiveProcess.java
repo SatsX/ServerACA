@@ -8,11 +8,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import cnam.tchat.aca.server.command.Command;
+import cnam.tchat.aca.server.command.Connect;
+import cnam.tchat.aca.server.command.Exit;
+import cnam.tchat.aca.server.command.Join;
+import cnam.tchat.aca.server.command.Quit;
 
 
 public class ReceiveProcess implements Runnable{
@@ -30,13 +33,44 @@ public class ReceiveProcess implements Runnable{
 	}
 
 	public String read() throws IOException{
+		String originalMessage;
 		String msg = null;
 		
 		while (msg == null) {
 			try {
 				// We recover the message send to us by the server
-				msg = br.readLine();
+				originalMessage = br.readLine();
 				System.out.println("Reading : " + msg);
+				JSONObject jsonMessage = new JSONObject(originalMessage);
+				if(jsonMessage.getString("post").startsWith("#"))
+				{
+					Command command;
+					switch(jsonMessage.getString("post")){
+						case "#CONNECT" :
+							command = new Connect(jsonMessage.getJSONArray("parameters"));
+							break;
+						case "#JOIN" :
+							command = new Join(jsonMessage.getJSONArray("parameters"));
+							break;
+						case "#EXIT" :
+							command = new Exit();
+							break;
+						case "#QUIT" :
+							command = new Quit();
+							break;
+						default :
+							JSONObject messageToSend = new JSONObject();
+							jsonMessage.put("nickname", "server");
+							jsonMessage.put("post", "Command not found");
+							return messageToSend.toString();
+					}
+					msg = command.takeDecision();
+				} else {
+					JSONObject messageToSend = new JSONObject();
+					jsonMessage.put("nickname", jsonMessage.getString("nickname"));
+					jsonMessage.put("post", jsonMessage.getString("post"));
+					msg = messageToSend.toString();
+				}
 			} catch (IOException e){
 				System.err.println("Error during reading line");
 				e.printStackTrace();

@@ -10,6 +10,6 @@ public abstract class Command {
 		// Useless
 	}
 	
-	public abstract JSONObject takeDecision();
+	public abstract String takeDecision();
 
 }
