@@ -6,7 +6,6 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import cnam.tchat.aca.server.dao.DAOChannel;
 import cnam.tchat.aca.server.messageProcess.MessageProcess;
 
 
