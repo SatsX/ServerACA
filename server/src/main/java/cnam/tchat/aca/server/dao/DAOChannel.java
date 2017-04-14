@@ -28,7 +28,7 @@ public class DAOChannel implements DAO<Channel> {
 		DAOChannel.LOGIN = login;
 		DAOChannel.PASSWORD = password;
 	}
-	//Find the post
+	//Find the channel
 	public Channel find(Object id) throws DAOException {
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
@@ -72,7 +72,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-	//Create a post
+	//Create a channel
 	public void create(Channel obj) throws DAOException {
 		final String sql = "INSERT INTO `channel` (`channel_id`, `channel_name`)"
 				+ " VALUES ( ? , ? ) ;";
@@ -103,7 +103,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 		}
 	}
-	//Update a post
+	//Update a channel
 	public void update(Channel obj) throws DAOException {
 		// TODO Auto-generated method stub
 				final String sql = "UPDATE `channel` SET `channel_name` = ? "
@@ -140,7 +140,7 @@ public class DAOChannel implements DAO<Channel> {
 					}
 				}
 	}
-	//Delete a post
+	//Delete a channel
 	public void delete(Channel obj) throws DAOException {
 		final String sql = "DELETE FROM `channel` WHERE `channel_id` = ? ;";
 		
@@ -339,8 +339,8 @@ public class DAOChannel implements DAO<Channel> {
 	//Update the channel use by an existing user
 	public void userJoinChannel(Channel obj) throws DAOException {
 		// TODO Auto-generated method stub
-				final String sql = "UPDATE `user` SET `User_id` = ? "
-						+ "WHERE `channel_id` = ? ;";
+				final String sql = "UPDATE `user` SET `channel_id` = ? "
+						+ "WHERE `User_id` = ? ;";
 				
 				Connection c = null;
 				PreparedStatement st = null;
@@ -351,8 +351,8 @@ public class DAOChannel implements DAO<Channel> {
 					// init connection
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
-					st.setInt(1, obj.getUser_id());
-					st.setInt(2, obj.getChannelId());
+					st.setInt(1, obj.getChannelId());
+					st.setInt(2, obj.getUser_id());
 					r = st.executeUpdate();
 					
 					// check modification		
@@ -373,6 +373,8 @@ public class DAOChannel implements DAO<Channel> {
 					}
 				}
 	}
+	
+	
 
 
 }

@@ -87,7 +87,7 @@ public class DAOPost implements DAO<Post> {
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getUserId());
+			st.setInt(1, obj.getPostId());
 			st.setString(2, obj.getContent());
 			st.setString(3, obj.getPostDate());
 			st.setInt(4, obj.getUserId());

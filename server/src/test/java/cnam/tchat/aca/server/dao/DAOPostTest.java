@@ -6,6 +6,7 @@ package cnam.tchat.aca.server.dao;
 import java.sql.Date;
 
 import cnam.tchat.aca.server.AppTest;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.Post;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -46,11 +47,11 @@ public class DAOPostTest extends TestCase {
 	public void testDAOPost()
     {
         try {
-			DAOPost d = new DAOPost(URL, LOGIN, PASSWORD);
+        	DAOPost d = (DAOPost) DAOFactory.getDAOPost();
 			Post p = new Post();
 			p.setPostId(1);
-			p.setContent("Coucou enchanté");
-			p.setPostDate("1993");
+			p.setContent("Coucou");
+			p.setPostDate("11/11/1993");
 			p.setUserId(1);
 			p.setChannelId(1);
 			
@@ -63,7 +64,7 @@ public class DAOPostTest extends TestCase {
 			//Test update
 			Post p3 = new Post();
 			p3.setPostId(1);
-			p3.setContent("Coucou enchanté");
+			p3.setContent("Hey");
 			p3.setPostDate("15/11/2017");
 			p3.setUserId(1);
 			p3.setChannelId(1);
