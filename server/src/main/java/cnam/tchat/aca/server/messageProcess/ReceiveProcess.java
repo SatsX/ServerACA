@@ -9,8 +9,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.HashMap;
-
-import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.json.JSONObject;
 
@@ -19,7 +19,6 @@ import cnam.tchat.aca.server.command.Connect;
 import cnam.tchat.aca.server.command.Exit;
 import cnam.tchat.aca.server.command.Join;
 import cnam.tchat.aca.server.command.Quit;
-
 
 public class ReceiveProcess implements Runnable{
 	// Read
@@ -54,6 +53,11 @@ public class ReceiveProcess implements Runnable{
 							break;
 						case "#JOIN" :
 							command = new Join(jsonMessage.getJSONArray("args"));
+							//String User = jsonMessage.getString("nickname");
+							//List listChannelUser = new LinkedList();
+							//listChannelUser.add(User);
+							//listChannelUser.add("Gabardin");
+							//System.out.println(listChannelUser);
 							break;
 						case "#EXIT" :
 							command = new Exit();

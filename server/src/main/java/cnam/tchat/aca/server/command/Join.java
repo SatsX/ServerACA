@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package cnam.tchat.aca.server.command;
 
 import org.json.JSONArray;
