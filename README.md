@@ -6,8 +6,8 @@ The server was developped to CNAM.
 
 It can use with differents client thanks to :
 	Command available : 
-	#CONNECT with args : <IP adress> <nickname>
-	#JOIN with args <channelName>
+	#CONNECT with args : IP adress nickname
+	#JOIN with args channelName
 	#QUIT allow to quit a channel join
 	#EXIT quit the server
 	
