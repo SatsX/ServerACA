@@ -8,6 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.HashMap;
+
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.json.JSONObject;
 
@@ -40,17 +43,17 @@ public class ReceiveProcess implements Runnable{
 			try {
 				// We recover the message send to us by the server
 				originalMessage = br.readLine();
-				System.out.println("Reading : " + msg);
+				System.out.println("Reading : " + originalMessage);
 				JSONObject jsonMessage = new JSONObject(originalMessage);
 				if(jsonMessage.getString("post").startsWith("#"))
 				{
 					Command command;
 					switch(jsonMessage.getString("post")){
 						case "#CONNECT" :
-							command = new Connect(jsonMessage.getJSONArray("parameters"));
+							command = new Connect(jsonMessage.getJSONArray("args"));
 							break;
 						case "#JOIN" :
-							command = new Join(jsonMessage.getJSONArray("parameters"));
+							command = new Join(jsonMessage.getJSONArray("args"));
 							break;
 						case "#EXIT" :
 							command = new Exit();
@@ -66,13 +69,13 @@ public class ReceiveProcess implements Runnable{
 					}
 					msg = command.takeDecision();
 				} else {
-					JSONObject messageToSend = new JSONObject();
 					jsonMessage.put("nickname", jsonMessage.getString("nickname"));
 					jsonMessage.put("post", jsonMessage.getString("post"));
-					msg = messageToSend.toString();
+					originalMessage = jsonMessage.toString();
+					return originalMessage;
 				}
 			} catch (IOException e){
-				System.err.println("Error during reading line");
+				System.err.println("Error during receive process");
 				e.printStackTrace();
 			}
 		}

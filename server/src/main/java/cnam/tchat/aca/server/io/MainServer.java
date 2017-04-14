@@ -1,10 +1,10 @@
 package cnam.tchat.aca.server.io;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 import cnam.tchat.aca.server.messageProcess.ReceiveProcess;
 
@@ -22,7 +22,7 @@ public class MainServer implements Runnable{
 		
 
 	public void run() {		
-		System.out.println("You are start SERVER ACA");
+		System.out.println("SERVER ACA is start");
 		System.out.println("[INFO] : Start server on the port : "+this.port);
 		
 		try {
@@ -38,9 +38,7 @@ public class MainServer implements Runnable{
 				Socket s = socketPrincipal.accept();
 				
 				ReceiveProcess p = new ReceiveProcess(s);
-				//pour quicker un user
-				//hmp.get("User").Cancel();
-				Thread t = new Thread(p);
+				Thread t = new Thread(p);            
 				t.start();
 				
 				usersAccepted++;
