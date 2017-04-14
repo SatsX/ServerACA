@@ -19,7 +19,7 @@ public class MainServer implements Runnable{
 		
 
 	public void run() {		
-		System.out.println("SERVER ACA is start");
+		System.out.println("Server ACA started !!");
 		System.out.println("[INFO] : Start server on the port : "+this.port);
 		
 		try {
@@ -42,6 +42,16 @@ public class MainServer implements Runnable{
 				System.err.println("[ERROR] : Failed to accept requests on main socket.");
 				e.printStackTrace();
 			
+			} finally {
+				try {
+					if(socketPrincipal == null){
+						socketPrincipal.close();
+					}
+				} catch (IOException e) {
+					System.err.println("Error during Server Socket init.");
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	}
