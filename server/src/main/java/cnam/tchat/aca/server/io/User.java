@@ -2,9 +2,6 @@
  * 
  */
 package cnam.tchat.aca.server.io;
-import java.sql.Date;
-
-import cnam.tchat.aca.server.dao.DAOUser;
 
 /**
  * @author Arnold / Adrien / Cihat

@@ -9,6 +9,10 @@ import cnam.tchat.aca.server.dao.DAOException;
 import cnam.tchat.aca.server.dao.DAOLogInfo;
 import cnam.tchat.aca.server.dao.DAOPost;
 import cnam.tchat.aca.server.dao.DAOUser;
+import cnam.tchat.aca.server.io.Channel;
+import cnam.tchat.aca.server.io.LogInfo;
+import cnam.tchat.aca.server.io.Post;
+import cnam.tchat.aca.server.io.User;
 
 /**
  * @author arnold
@@ -20,19 +24,19 @@ public class DAOFactory {
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "root";
 	
-	public static DAO getDAOUser() throws DAOException{
+	public static DAO<User> getDAOUser() throws DAOException{
 		return new DAOUser(URL, LOGIN, PASSWORD);
 	}
 	
-	public static DAO getDAOChannel() throws DAOException{
+	public static DAO<Channel> getDAOChannel() throws DAOException{
 		return new DAOChannel(URL, LOGIN, PASSWORD);
 	}
 	
-	public static DAO getDAOLogInfo() throws DAOException{
+	public static DAO<LogInfo> getDAOLogInfo() throws DAOException{
 		return new DAOLogInfo(URL, LOGIN, PASSWORD);
 	}
 	
-	public static DAO getDAOPost() throws DAOException{
+	public static DAO<Post> getDAOPost() throws DAOException{
 		return new DAOPost(URL, LOGIN, PASSWORD);
 	}
 

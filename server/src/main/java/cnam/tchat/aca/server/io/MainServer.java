@@ -1,7 +1,6 @@
 package cnam.tchat.aca.server.io;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import cnam.tchat.aca.server.messageProcess.ReceiveProcess;
 public class MainServer implements Runnable{
 	private Integer port;
 	private ServerSocket socketPrincipal;
-	private int usersAccepted = 0;
 	HashMap<String, ReceiveProcess> hmp = new HashMap<String, ReceiveProcess>();
 	
 	public MainServer(Integer port) {
@@ -40,8 +38,6 @@ public class MainServer implements Runnable{
 				ReceiveProcess p = new ReceiveProcess(s);
 				Thread t = new Thread(p);            
 				t.start();
-				
-				usersAccepted++;
 								
 			} catch (IOException e) {
 				System.err.println("[ERROR] : Failed to accept requests on main socket.");
