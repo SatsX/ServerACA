@@ -80,14 +80,13 @@ public class DAOLogInfo implements DAO<LogInfo> {
 		
 		Connection c = null;
 		PreparedStatement st = null;
-		int r = 0;
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setString(1, obj.getIpAdress());
 			st.setDate(2, obj.getHour());
-			r = st.executeUpdate();
+			st.executeUpdate();
 				
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information creation.", e);
@@ -105,7 +104,6 @@ public class DAOLogInfo implements DAO<LogInfo> {
 	}
 
 	public void update(LogInfo obj) throws DAOException {
-		// TODO Auto-generated method stub
 				final String sql = "UPDATE `logInfo` SET `ip_adress` = ? ,"
 						+ " `hour` = ? ,"
 						+ "WHERE `id_log` = ? ;";

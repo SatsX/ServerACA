@@ -3,28 +3,15 @@
  */
 package cnam.tchat.aca.server.dao;
 
-import java.sql.Date;
-
-import cnam.tchat.aca.server.AppTest;
 import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.User;
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
- * @author arnold / adrien / cihat 
+ * @author Adrien / Cihat / Arnold
  *
  */
 public class DAOUserTest extends TestCase {
-
-	/**
-	 * @param name
-	 */
-	
-	private static final String URL = "jdbc:mysql://localhost:3306/chatirc?useSSL=false";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "root";
 	
 	public DAOUserTest(String name) {
 		super(name);
