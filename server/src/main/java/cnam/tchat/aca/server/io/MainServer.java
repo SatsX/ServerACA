@@ -4,30 +4,26 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.apache.log4j.Logger;
 
 import cnam.tchat.aca.server.messageProcess.MessageProcess;
 
 
 public class MainServer implements Runnable{
 	private Integer port;
-	private boolean debug;
 	private ServerSocket socketPrincipal;
-	private static final Logger LOG = Logger.getLogger(MainServer.class.getName());
 	
-	public MainServer(Integer port, boolean debug) {
+	public MainServer(Integer port) {
 		this.port = port;
-		this.debug = debug;
+		
 	}
 		
 
 	public void run() {		
-		LOG.info("Server ACA started !");
-		if (debug == true){
-			System.out.println("[INFO] : Start server on the port : "+ port);
-		}
+		System.out.println("SERVER ACA is start");
+		System.out.println("[INFO] : Start server on the port : "+this.port);
+		
 		try {
-			socketPrincipal = new ServerSocket(port);
+			socketPrincipal = new ServerSocket(this.port);
 			
 		} catch (IOException e) {
 			System.err.println("[ERROR] : connection to socket is impossible ");
@@ -37,6 +33,7 @@ public class MainServer implements Runnable{
 		while(true) {
 			try {
 				Socket s = socketPrincipal.accept();
+				System.out.println("New user connected " + s );
 				MessageProcess p = new MessageProcess(s);
 				Thread t = new Thread(p);            
 				t.start();
@@ -45,8 +42,6 @@ public class MainServer implements Runnable{
 				System.err.println("[ERROR] : Failed to accept requests on main socket.");
 				e.printStackTrace();
 			
-			} finally {
-				// close connection
 			}
 		}
 	}

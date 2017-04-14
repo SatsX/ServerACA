@@ -22,12 +22,9 @@ public class MessageProcess implements Runnable{
 	private InputStream in = null;
 	private InputStreamReader isr = null;
 	private BufferedReader br = null;
-	
-	//Write 
 	private OutputStream out = null;
 	private OutputStreamWriter osw = null;
 	private BufferedWriter bw = null;
-	
 	private Socket so;
 
 	public MessageProcess(Socket cs) {		
@@ -102,7 +99,7 @@ public class MessageProcess implements Runnable{
 			   		out = so.getOutputStream();
 					osw = new OutputStreamWriter(out, "UTF-8");
 					bw = new BufferedWriter(osw);
-					System.out.println("New user : " + so);
+					
 					System.out.println("Writing : " + msgToClient);
 					bw.write(msgToClient);
 					bw.newLine();
