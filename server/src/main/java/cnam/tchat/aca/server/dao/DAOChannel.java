@@ -81,8 +81,7 @@ public class DAOChannel implements DAO<Channel> {
 		
 		Connection c = null;
 		PreparedStatement st = null;
-		int r = 0;
-		
+		int r = 0;		
 		
 		try{
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -193,7 +192,7 @@ public class DAOChannel implements DAO<Channel> {
 			while(r.next()){
 				// Create a channel
 				Channel ch = new Channel();
-				// Recuperate all fields
+				// Recover all fields
 				ch.setChannelId(r.getInt("channel_id"));
 				ch.setChannelName(r.getString("channel_name"));
 				// Add the channel to the list

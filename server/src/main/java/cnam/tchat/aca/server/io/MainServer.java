@@ -3,28 +3,32 @@ package cnam.tchat.aca.server.io;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 
-import cnam.tchat.aca.server.messageProcess.ReceiveProcess;
+import org.apache.log4j.Logger;
+
+import cnam.tchat.aca.server.dao.DAOChannel;
+import cnam.tchat.aca.server.messageProcess.MessageProcess;
 
 
 public class MainServer implements Runnable{
 	private Integer port;
+	private boolean debug;
 	private ServerSocket socketPrincipal;
-	HashMap<String, ReceiveProcess> hmp = new HashMap<String, ReceiveProcess>();
+	private static final Logger LOG = Logger.getLogger(MainServer.class.getName());
 	
-	public MainServer(Integer port) {
+	public MainServer(Integer port, boolean debug) {
 		this.port = port;
-		
+		this.debug = debug;
 	}
 		
 
 	public void run() {		
-		System.out.println("SERVER ACA is start");
-		System.out.println("[INFO] : Start server on the port : "+this.port);
-		
+		LOG.info("Server ACA started !");
+		if (debug == true){
+			System.out.println("[INFO] : Start server on the port : "+ port);
+		}
 		try {
-			socketPrincipal = new ServerSocket(this.port);
+			socketPrincipal = new ServerSocket(port);
 			
 		} catch (IOException e) {
 			System.err.println("[ERROR] : connection to socket is impossible ");
@@ -34,8 +38,7 @@ public class MainServer implements Runnable{
 		while(true) {
 			try {
 				Socket s = socketPrincipal.accept();
-				
-				ReceiveProcess p = new ReceiveProcess(s);
+				MessageProcess p = new MessageProcess(s);
 				Thread t = new Thread(p);            
 				t.start();
 								

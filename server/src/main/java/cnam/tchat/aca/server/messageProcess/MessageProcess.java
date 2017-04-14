@@ -17,17 +17,20 @@ import cnam.tchat.aca.server.command.Exit;
 import cnam.tchat.aca.server.command.Join;
 import cnam.tchat.aca.server.command.Quit;
 
-public class ReceiveProcess implements Runnable{
+public class MessageProcess implements Runnable{
 	// Read
 	private InputStream in = null;
 	private InputStreamReader isr = null;
 	private BufferedReader br = null;
+	
+	//Write 
 	private OutputStream out = null;
 	private OutputStreamWriter osw = null;
 	private BufferedWriter bw = null;
+	
 	private Socket so;
 
-	public ReceiveProcess(Socket cs) {		
+	public MessageProcess(Socket cs) {		
 		so = cs;		
 	}
 
@@ -99,7 +102,7 @@ public class ReceiveProcess implements Runnable{
 			   		out = so.getOutputStream();
 					osw = new OutputStreamWriter(out, "UTF-8");
 					bw = new BufferedWriter(osw);
-					
+					System.out.println("New user : " + so);
 					System.out.println("Writing : " + msgToClient);
 					bw.write(msgToClient);
 					bw.newLine();
