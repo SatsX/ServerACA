@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cnam.tchat.aca.server.command;
 
 import java.util.ArrayList;
@@ -12,14 +9,13 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @author arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
+//Exit class extends Command
 public class Exit extends Command {
 
-	/**
-	 * 
-	 */
+	//Implements constructor
 	public Exit(String nicknameUser) {
 		this.nicknameUser = nicknameUser;
 	}

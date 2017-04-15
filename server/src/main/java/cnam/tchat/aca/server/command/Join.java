@@ -1,4 +1,3 @@
-
 package cnam.tchat.aca.server.command;
 
 import java.util.ArrayList;
@@ -11,15 +10,16 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @author arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
-public class Join extends Command {
 
+//Join Class extends Command
+public class Join extends Command {
+	//implements arguments
 	private String channel;
-	/**
-	 * 
-	 */
+	
+	// implements constructor
 	public Join(JSONArray parameters, String nicknameUser) {
 		this.channel = parameters.getString(0);
 		this.nicknameUser = nicknameUser;
@@ -33,16 +33,9 @@ public class Join extends Command {
 		
 		
 		User u = null;
-		
-		// recover user
-		/*for (User tmpUser : MainServer.getUserConnected()) {
-			if(tmpUser.getUserName().equals(nicknameUser)) {
-				u = tmpUser;
-			}
-		}*/
-		
 		u = MainServer.getUserConnected().get(nicknameUser);
 		Channel ch = existenceChannel();
+		
 		// check if channel exists, if exists, add user to existing channel, else create new channel
 		if(ch == null) {
 			System.out.println("if");
@@ -57,8 +50,10 @@ public class Join extends Command {
 			System.out.println("else");
 		}
 		
+		//add to user a channel
 		u.setChannelUser(ch);
 				
+		//the JSONObject traitement
 		JSONObject jsonMessage = new JSONObject();
 		jsonMessage.put("nickname", "server");
 		jsonMessage.put("post", "You have joined channel " + channel);

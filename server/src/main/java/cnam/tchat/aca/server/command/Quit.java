@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cnam.tchat.aca.server.command;
 
 import java.util.ArrayList;
@@ -12,14 +9,14 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @author arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
+
+// Quit class extends Command
 public class Quit extends Command {
 
-	/**
-	 * 
-	 */
+	// Implements constructor
 	public Quit(String nicknameUser) {
 		this.nicknameUser = nicknameUser;
 	}
@@ -57,6 +54,7 @@ public class Quit extends Command {
 			}
 		}
 		
+		//The JSON traitement
 		JSONObject jsonMessage = new JSONObject();
 		jsonMessage.put("nickname", "server");
 		jsonMessage.put("post", "You have left channel");
