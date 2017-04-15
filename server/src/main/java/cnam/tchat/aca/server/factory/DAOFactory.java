@@ -15,7 +15,7 @@ import cnam.tchat.aca.server.io.Post;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @author arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
 public class DAOFactory {

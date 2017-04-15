@@ -16,13 +16,14 @@ import cnam.tchat.aca.server.io.Post;
 * @authors Adrien / Cihat / Arnold
  *
  */
+// Class DAOPost
 public class DAOPost implements DAO<Post> {
 
 	private static final Logger LOG = Logger.getLogger(DAOPost.class.getName());
 	private static String URL;
 	private static String LOGIN;
 	private static String PASSWORD;
-	
+	// Implement DAOPost
 	public DAOPost(String url, String login, String password) throws DAOException{
 		DAOPost.URL = url;
 		DAOPost.LOGIN = login;
@@ -30,6 +31,7 @@ public class DAOPost implements DAO<Post> {
 	}
 	//Find the post
 	public Post find(Object id) throws DAOException {
+		// Check format id
 		if(!(id instanceof Integer))
 			throw new DAOException("ID not take in charge.");
 		
@@ -38,26 +40,31 @@ public class DAOPost implements DAO<Post> {
 		Connection c = null;
 		PreparedStatement st = null;
 		ResultSet r = null;
-		Post p = new Post();
+		// Post instance
+ 		Post p = new Post();
 		
 		try{
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, (Integer) id);
+			// Execute request
 			r = st.executeQuery();
 			
 			if(r.next()){
+				// Take data
 				p.setPostId(r.getInt("post_id"));
 				p.setContent(r.getString("content"));
 				p.setPostDate(r.getString("post_date"));
 				p.setUserId(r.getString("user_id"));
 				p.setChannelId(r.getInt("channel_id"));
+				// Return data
 				return p;
-				
+			// Check existence post for id
 			}else{
 				throw new DAOException("Error no post for this id.");
 			}
-				
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information loading.", e);
 		}finally{
@@ -83,6 +90,7 @@ public class DAOPost implements DAO<Post> {
 		PreparedStatement st = null;		
 		
 		try{
+			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getPostId());
@@ -90,8 +98,9 @@ public class DAOPost implements DAO<Post> {
 			st.setString(3, obj.getPostDate());
 			st.setString(4, obj.getUserId());
 			st.setInt(5, obj.getChannelId());
+			// Execute the request
 			st.executeUpdate();
-				
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during post creation.", e);
 		}finally{
@@ -121,12 +130,14 @@ public class DAOPost implements DAO<Post> {
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getContent());
 					st.setInt(2, obj.getPostId());
+					// Execute request
 					r = st.executeUpdate();
 					
 					// check modification		
 					if(r < 1){
 						throw new DAOException("No post was updated.");
 					}
+				// Check the request
 				} catch (SQLException e){
 					throw new DAOException("Error in SQL engines during post updating.", e);
 				}finally{
@@ -154,12 +165,13 @@ public class DAOPost implements DAO<Post> {
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getPostId());
+			// Execute the request
 			r = st.executeUpdate();
-			
+			// Check delete
 			if(r < 1){
 				throw new DAOException("No post was deleted.");
 			}
-				
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during post deleting.", e);
 		}finally{

@@ -18,13 +18,14 @@ import cnam.tchat.aca.server.io.Channel;
 * @authors Adrien / Cihat / Arnold
  *
  */
+// Class DAOChannel
 public class DAOChannel implements DAO<Channel> {
-
+	// Connection instance
 	private static final Logger LOG = Logger.getLogger(DAOChannel.class.getName());
 	private static String URL;
 	private static String LOGIN;
 	private static String PASSWORD;
-	
+	// Implement DAOChannel
 	public DAOChannel(String url, String login, String password) throws DAOException{
 		DAOChannel.URL = url;
 		DAOChannel.LOGIN = login;
@@ -47,6 +48,7 @@ public class DAOChannel implements DAO<Channel> {
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setString(1, (String) channelName);
+			// Execute the request
 			r = st.executeQuery();
 			
 			if(r.next()){
@@ -54,11 +56,11 @@ public class DAOChannel implements DAO<Channel> {
 				ch.setChannelName(r.getString("channel_name"));
 				
 				return ch;
-				
+			// Check existence channel for the id
 			}else{
 				throw new DAOException("Error no channel for this id.");
 			}
-				
+		// Check the request	
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information loading.", e);
 		}finally{
@@ -89,8 +91,9 @@ public class DAOChannel implements DAO<Channel> {
 			st = c.prepareStatement(sql);
 			st.setInt(1, obj.getChannelId());
 			st.setString(2, obj.getChannelName());
+			// Execute the request
 			st.executeUpdate();
-				
+		// Check the request	
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during channel creation.", e);
 		}finally{
@@ -120,12 +123,14 @@ public class DAOChannel implements DAO<Channel> {
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getChannelName());
 					st.setInt(2, obj.getChannelId());
+					// Execute the request
 					r = st.executeUpdate();
 					
 					// check modification		
 					if(r < 1){
 						throw new DAOException("No channel was updated.");
 					}
+				// Check the request
 				} catch (SQLException e){
 					throw new DAOException("Error in SQL engines during channel updating.", e);
 				}finally{
@@ -155,11 +160,11 @@ public class DAOChannel implements DAO<Channel> {
 			st.setInt(1, obj.getChannelId());
 			// Execute the request 
 			r = st.executeUpdate();
-			
+			// Check removal
 			if(r < 1){
 				throw new DAOException("No channel was deleted.");
 			}
-				
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during channel deleting.", e);
 		}finally{
@@ -201,6 +206,7 @@ public class DAOChannel implements DAO<Channel> {
 			}
 			// Return the list
 			return l;	
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information loading.", e);
 		}finally{

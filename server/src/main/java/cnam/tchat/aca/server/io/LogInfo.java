@@ -5,9 +5,10 @@ package cnam.tchat.aca.server.io;
 import java.sql.Date;
 
 /**
- * @author Arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
+// Class LogInfo
 public class LogInfo {
 
 	private int idLog;
@@ -55,9 +56,9 @@ public class LogInfo {
 	public void setHour(Date hour) {
 		this.hour = hour;
 	}
-
+	
 	public LogInfo() {
-		//Useless
+	
 	}
 
 }

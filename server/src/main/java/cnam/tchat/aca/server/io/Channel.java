@@ -5,12 +5,11 @@ package cnam.tchat.aca.server.io;
 
 import java.util.ArrayList;
 
-
-
 /**
  * @authors Adrien / Cihat / Arnold
  *
  */
+// Class Channel
 public class Channel {
 	
 	private int channelId;
@@ -63,7 +62,7 @@ public class Channel {
 		this.lUser = lUser;
 	}
 
-	
+	// Implement compareTo
 	public boolean compareTo(Channel ch){
 		if(this.channelId == ch.channelId && this.channelName.compareTo(ch.channelName) == 0) {
 			return true;
@@ -71,7 +70,7 @@ public class Channel {
 			return false;
 		}
 	}
-	
+	// Implement Channel
 	public Channel() {
 		lUser = new ArrayList<>();
 	}

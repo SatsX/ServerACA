@@ -3,6 +3,7 @@ package cnam.tchat.aca.server.dao;
 * @authors Adrien / Cihat / Arnold
  *
  */
+// Implement DAO
 public interface DAO<T> {
 	
 	public T find(Object id) throws DAOException;

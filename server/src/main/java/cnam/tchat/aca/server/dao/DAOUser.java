@@ -17,13 +17,14 @@ import cnam.tchat.aca.server.io.User;
  * @authors Adrien / Cihat / Arnold
  *
  */
+// Class DAOUser
 public class DAOUser implements DAO<User> {
-
+	// Connection instance
 	private static final Logger LOG = Logger.getLogger(DAOUser.class.getName());
 	private static String URL;
 	private static String LOGIN;
 	private static String PASSWORD;
-	
+	// Implement DAOUser
 	public DAOUser(String url, String login, String password) throws DAOException{
 		DAOUser.URL = url;
 		DAOUser.LOGIN = login;
@@ -31,6 +32,7 @@ public class DAOUser implements DAO<User> {
 	}
 	// Find the user.
 	public User find(Object id) throws DAOException {
+		// Check format id
 		if(!(id instanceof String))
 			throw new DAOException("ID not take in charge.");
 		
@@ -46,6 +48,7 @@ public class DAOUser implements DAO<User> {
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setString(1, (String) id);
+			// Execute request
 			r = st.executeQuery();
 			
 			if(r.next()){
@@ -53,11 +56,11 @@ public class DAOUser implements DAO<User> {
 				a.setUserName(r.getString("User_name"));
 				
 				return a;
-				
+			// Check existence user for this id
 			}else{
 				throw new DAOException("Error no user for this id.");
 			}
-				
+		// Check the request	
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during log information loading.", e);
 		}finally{
@@ -88,8 +91,9 @@ public class DAOUser implements DAO<User> {
 			st = c.prepareStatement(sql);
 			st.setString(1, obj.getUserId());
 			st.setString(2, obj.getUserName());
+			// Execute the request
 			st.executeUpdate();
-				
+		// Check the request
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during user creation.", e);
 		}finally{
@@ -120,12 +124,14 @@ public class DAOUser implements DAO<User> {
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getUserName());
 					st.setString(2, obj.getUserId());
+					// Execute request
 					r = st.executeUpdate();
 					
 					// check modification		
 					if(r < 1){
 						throw new DAOException("No user was updated.");
 					}
+				// Check the request
 				} catch (SQLException e){
 					throw new DAOException("Error in SQL engines during user updating.", e);
 				}finally{
@@ -153,12 +159,13 @@ public class DAOUser implements DAO<User> {
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
 			st.setString(1, obj.getUserId());
+			// Execute the request
 			r = st.executeUpdate();
-			
+			// Check delete
 			if(r < 1){
 				throw new DAOException("No user was deleted.");
 			}
-				
+		// Check the request	
 		} catch (SQLException e){
 			throw new DAOException("Error in SQL engines during user deleting.", e);
 		}finally{
@@ -199,8 +206,9 @@ public class DAOUser implements DAO<User> {
 			}
 			// Return the list
 			return l;	
+		// Check the request
 		} catch (SQLException e){
-			throw new DAOException("Error in SQL engines during log information loading.", e);
+			throw new DAOException("Error in SQL engines during display list user.", e);
 		}finally{
 			try{
 				if(r != null)
