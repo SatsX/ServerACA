@@ -10,7 +10,7 @@ import java.net.Socket;
  *
  */
 public class User {
-
+	// Define attributes
 	private String userId;
 	private String userName;
 	private Socket socketUser;
@@ -75,7 +75,7 @@ public class User {
 	public void setSocketUser(Socket socketUser) {
 		this.socketUser = socketUser;
 	}
-
+	// overload compareTO
 	public boolean compareTo(User u){
 		if(this.userId == u.userId && this.userName.compareTo(u.userName) == 0) {
 			return true;

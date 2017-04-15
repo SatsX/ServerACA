@@ -62,7 +62,7 @@ public class Channel {
 		this.lUser = lUser;
 	}
 
-	// Implement compareTo
+	// overload compareTo
 	public boolean compareTo(Channel ch){
 		if(this.channelId == ch.channelId && this.channelName.compareTo(ch.channelName) == 0) {
 			return true;

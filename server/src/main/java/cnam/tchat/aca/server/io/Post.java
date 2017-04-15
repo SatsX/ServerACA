@@ -7,8 +7,9 @@ package cnam.tchat.aca.server.io;
 * @authors Adrien / Cihat / Arnold
  *
  */
+// Implement post
 public class Post {
-
+	//define attributes
 	private int postId;
 	private String content;
 	private String postDate;
@@ -84,7 +85,7 @@ public class Post {
 	public void setChannelId(int channelId) {
 		this.channelId = channelId;
 	}
-	
+	// overload compareTo
 	public boolean compareTo(Post p){
 		if(this.postId == p.postId && this.content.compareTo(p.content) == 0) {
 			return true;
