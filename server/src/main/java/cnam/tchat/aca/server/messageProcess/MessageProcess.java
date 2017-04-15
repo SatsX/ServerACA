@@ -22,9 +22,12 @@ public class MessageProcess implements Runnable{
 	private InputStream in = null;
 	private InputStreamReader isr = null;
 	private BufferedReader br = null;
+	
+	//Write 
 	private OutputStream out = null;
 	private OutputStreamWriter osw = null;
 	private BufferedWriter bw = null;
+	
 	private Socket so;
 
 	public MessageProcess(Socket cs) {		
@@ -39,6 +42,9 @@ public class MessageProcess implements Runnable{
 			try {
 				// We recover the message send to us by the server
 				originalMessage = br.readLine();
+				if(originalMessage == null){
+					break;
+				}
 				System.out.println("Reading : " + originalMessage);
 				JSONObject jsonMessage = new JSONObject(originalMessage);
 				if(jsonMessage.getString("post").startsWith("#"))
@@ -50,11 +56,6 @@ public class MessageProcess implements Runnable{
 							break;
 						case "#JOIN" :
 							command = new Join(jsonMessage.getJSONArray("args"));
-							//String User = jsonMessage.getString("nickname");
-							//List listChannelUser = new LinkedList();
-							//listChannelUser.add(User);
-							//listChannelUser.add("Gabardin");
-							//System.out.println(listChannelUser);
 							break;
 						case "#EXIT" :
 							command = new Exit();
@@ -89,25 +90,45 @@ public class MessageProcess implements Runnable{
 
 	public void run() {
 		
-		while(so.isConnected()){
+		if(so.isConnected()){
 	   		try {
 				in = so.getInputStream();
 				isr = new InputStreamReader(in, "UTF-8");
 		   		br = new BufferedReader(isr);
 		   		while(true){
 			   		String msgToClient = this.read();
+					if(msgToClient == null){
+						break;
+					}
 			   		out = so.getOutputStream();
 					osw = new OutputStreamWriter(out, "UTF-8");
 					bw = new BufferedWriter(osw);
-					
+					System.out.println("New user : " + so);
 					System.out.println("Writing : " + msgToClient);
 					bw.write(msgToClient);
 					bw.newLine();
 					bw.flush();
 		   		}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.err.println("Error during socket server init.");
 				e.printStackTrace();
+			}finally {
+				
+					try {
+						if(in == null){
+						in.close();
+						}
+						if(isr == null){
+							isr.close();
+						}
+						if(br == null){
+							br.close();
+						}
+					} catch (IOException e) {
+						System.err.println("Error during streams closing.");
+						e.printStackTrace();
+					}
+				
 			}
 	   		  		
 	   		}
