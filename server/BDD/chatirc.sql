@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 15 Avril 2017 à 04:53
+-- Généré le :  Sam 15 Avril 2017 à 13:46
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -52,8 +52,8 @@ CREATE TABLE `post` (
 --
 
 CREATE TABLE `user` (
-  `User_id` varchar(16) NOT NULL,
-  `User_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `User_id` varchar(255) NOT NULL,
+  `User_name` varchar(255) NOT NULL,
   `channel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
