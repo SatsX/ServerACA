@@ -43,6 +43,7 @@ public class Join extends Command {
 		if(ch == null) {
 			ch = new Channel();
 			ch.setChannelName(channel);
+			ch.setChannelId(channel);
 			ArrayList<User> listUser = new ArrayList<User>();
 			listUser.add(u);
 			ch.setlUser(listUser);
