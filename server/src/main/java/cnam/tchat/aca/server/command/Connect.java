@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cnam.tchat.aca.server.command;
 
 import java.net.Socket;
@@ -12,20 +9,19 @@ import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
 /**
- * @author arnold
+ * @authors Adrien / Cihat / Arnold
  *
  */
+
+// Connect class extends Command
 public class Connect extends Command {
 
+	//Implements Connect
 	private JSONArray parameters;
-	private String nicknameUser;
 	private Socket socketUser;
-	
-	/**
-	 * 
-	 */
+
+	//Implements constructor
 	public Connect(JSONArray parameters, String nicknameUser, Socket socketUser) {
-		// TODO Auto-generated constructor stub
 		this.parameters = parameters;
 		this.nicknameUser = nicknameUser;
 		this.socketUser = socketUser;
