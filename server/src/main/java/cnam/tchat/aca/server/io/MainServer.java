@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cnam.tchat.aca.server.messageProcess.MessageProcess;
 
@@ -11,12 +12,13 @@ import cnam.tchat.aca.server.messageProcess.MessageProcess;
 public class MainServer implements Runnable{
 	private Integer port;
 	private ServerSocket socketPrincipal;
-	private static ArrayList<User> userConnected;
+	private static HashMap<String, User> userConnected;
 	private static ArrayList<Channel> listChannel;
 	
 	public MainServer(Integer port) {
 		this.port = port;
-		
+		userConnected = new HashMap<>();
+		listChannel = new ArrayList<>();
 	}
 		
 
@@ -62,7 +64,7 @@ public class MainServer implements Runnable{
 	/**
 	 * @return the userConnected
 	 */
-	public static ArrayList<User> getUserConnected() {
+	public static HashMap<String,User> getUserConnected() {
 		return userConnected;
 	}
 
@@ -70,7 +72,7 @@ public class MainServer implements Runnable{
 	/**
 	 * @param userConnected the userConnected to set
 	 */
-	public static void setUserConnected(ArrayList<User> userConnected) {
+	public static void setUserConnected(HashMap<String, User> userConnected) {
 		MainServer.userConnected = userConnected;
 	}
 

@@ -5,9 +5,6 @@ package cnam.tchat.aca.server.io;
 
 import java.util.ArrayList;
 
-import cnam.tchat.aca.server.dao.DAOChannel;
-import cnam.tchat.aca.server.dao.DAOException;
-import cnam.tchat.aca.server.factory.DAOFactory;
 
 
 /**
@@ -76,6 +73,6 @@ public class Channel {
 	}
 	
 	public Channel() {
-		
+		lUser = new ArrayList<>();
 	}
 }

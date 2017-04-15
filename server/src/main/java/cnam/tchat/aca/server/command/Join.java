@@ -37,25 +37,30 @@ public class Join extends Command {
 		User u = null;
 		
 		// recover user
-		for (User tmpUser : MainServer.getUserConnected()) {
+		/*for (User tmpUser : MainServer.getUserConnected()) {
 			if(tmpUser.getUserName().equals(nicknameUser)) {
 				u = tmpUser;
 			}
-		}
+		}*/
 		
+		u = MainServer.getUserConnected().get(nicknameUser);
 		Channel ch = existenceChannel();
-		
 		// check if channel exists, if exists, add user to existing channel, else create new channel
 		if(ch == null) {
+			System.out.println("if");
 			ch = new Channel();
 			ch.setChannelName(channel);
 			ArrayList<User> listUser = new ArrayList<User>();
 			listUser.add(u);
 			ch.setlUser(listUser);
+			MainServer.getListChannel().add(ch);
 		} else {
 			ch.getlUser().add(u);
+			System.out.println("else");
 		}
 		
+		u.setChannelUser(ch);
+				
 		JSONObject jsonMessage = new JSONObject();
 		jsonMessage.put("nickname", "server");
 		jsonMessage.put("post", "You have joined channel " + channel);
@@ -66,7 +71,9 @@ public class Join extends Command {
 	// check if channel exists, if exists return channel, else return null
 	private Channel existenceChannel() {
 		for (Channel tmp : MainServer.getListChannel()) {
-			if(tmp.getChannelName().equals(channel)) {
+			System.out.println("cc" + tmp.getChannelName());
+			System.out.println("hey" + channel);
+			if(tmp.getChannelName().compareTo(channel) == 0) {
 				return tmp;
 			}
 		}

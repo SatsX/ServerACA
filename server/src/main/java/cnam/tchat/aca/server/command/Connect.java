@@ -44,7 +44,7 @@ public class Connect extends Command {
 		u.setSocketUser(socketUser);
 		
 		// add user to the server
-		MainServer.getUserConnected().add(u);
+		MainServer.getUserConnected().put(nicknameUser, u);
 		System.out.println(MainServer.getUserConnected());
 		
 		// insert user into database

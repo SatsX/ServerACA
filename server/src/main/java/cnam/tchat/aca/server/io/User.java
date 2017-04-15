@@ -14,6 +14,7 @@ public class User {
 	private String userId;
 	private String userName;
 	private Socket socketUser;
+	private Channel channelUser;
 	
 	
 	/**
@@ -36,6 +37,13 @@ public class User {
 	public String getUserName() {
 		return userName;
 	}
+	
+	/**
+	 * @return the userName
+	 */
+	public Channel getChannelUser() {
+		return channelUser;
+	}
 
 	/**
 	 * @param userName the userName to set
@@ -43,8 +51,13 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-
+	
+	/**
+	 * @param set ChannelUset
+	 */
+	public void setChannelUser(Channel channelUser) {
+		this.channelUser = channelUser;
+	}
 
 	
 	/**
@@ -53,6 +66,8 @@ public class User {
 	public Socket getSocketUser() {
 		return socketUser;
 	}
+	
+	
 
 	/**
 	 * @param socketUser the socketUser to set
@@ -70,7 +85,6 @@ public class User {
 	}
 
 	public User() {
-		//Useless
 	}
 
 }

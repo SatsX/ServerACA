@@ -16,6 +16,9 @@ import cnam.tchat.aca.server.command.Connect;
 import cnam.tchat.aca.server.command.Exit;
 import cnam.tchat.aca.server.command.Join;
 import cnam.tchat.aca.server.command.Quit;
+import cnam.tchat.aca.server.io.Channel;
+import cnam.tchat.aca.server.io.MainServer;
+import cnam.tchat.aca.server.io.User;
 
 public class MessageProcess implements Runnable{
 	// Read
@@ -29,8 +32,9 @@ public class MessageProcess implements Runnable{
 	private BufferedWriter bw = null;
 	
 	private Socket so;
+	private boolean isCommand = false;
 
-	public MessageProcess(Socket cs) {		
+	public MessageProcess(Socket cs) {	
 		so = cs;		
 	}
 
@@ -50,6 +54,7 @@ public class MessageProcess implements Runnable{
 				if(jsonMessage.getString("post").startsWith("#"))
 				{
 					Command command;
+					isCommand = true;
 					switch(jsonMessage.getString("post")){
 						case "#CONNECT" :
 							command = new Connect(jsonMessage.getJSONArray("args"), jsonMessage.getString("nickname"), so);
@@ -105,9 +110,32 @@ public class MessageProcess implements Runnable{
 					bw = new BufferedWriter(osw);
 					System.out.println("New user : " + so);
 					System.out.println("Writing : " + msgToClient);
-					bw.write(msgToClient);
-					bw.newLine();
-					bw.flush();
+					if(isCommand){
+						bw.write(msgToClient);
+						bw.newLine();
+						bw.flush();
+						isCommand = false;
+					} else {
+						JSONObject msgToRoom= new JSONObject(msgToClient);
+						String senderNickName = msgToRoom.getString("nickname");					
+						User u = MainServer.getUserConnected().get(senderNickName);
+						
+						Channel ch = u.getChannelUser();
+						
+						for(User tmp : ch.getlUser()){
+							System.out.println(tmp);
+							System.out.println(ch.getlUser());
+							out = tmp.getSocketUser().getOutputStream();
+							osw = new OutputStreamWriter(out, "UTF-8");
+							bw = new BufferedWriter(osw);
+							
+							bw.write(msgToClient);
+							bw.newLine();
+							bw.flush();
+						}
+												
+					}
+					
 		   		}
 			} catch (IOException e) {
 				System.err.println("Error during socket server init.");
