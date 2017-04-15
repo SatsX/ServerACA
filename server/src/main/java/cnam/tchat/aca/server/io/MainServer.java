@@ -6,6 +6,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cnam.tchat.aca.server.dao.DAOChannel;
+import cnam.tchat.aca.server.dao.DAOException;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.messageProcess.MessageProcess;
 /**
  * @authors Adrien / Cihat / Arnold
@@ -35,6 +38,15 @@ public class MainServer implements Runnable{
 		} catch (IOException e) {
 			System.err.println("[ERROR] : connection to socket is impossible ");
 			e.printStackTrace();
+		}
+		
+		// list channel from database
+		try {
+			DAOChannel dc = (DAOChannel) DAOFactory.getDAOChannel();
+			listChannel = dc.listAllChannel();
+		} catch (DAOException e1) {
+			System.err.println("Error during listing channel");
+			e1.printStackTrace();
 		}
 		
 		while(true) {

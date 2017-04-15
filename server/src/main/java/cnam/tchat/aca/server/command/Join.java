@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cnam.tchat.aca.server.dao.DAOChannel;
+import cnam.tchat.aca.server.dao.DAOException;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.Channel;
 import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
@@ -38,7 +41,6 @@ public class Join extends Command {
 		
 		// check if channel exists, if exists, add user to existing channel, else create new channel
 		if(ch == null) {
-			System.out.println("if");
 			ch = new Channel();
 			ch.setChannelName(channel);
 			ArrayList<User> listUser = new ArrayList<User>();
@@ -47,8 +49,17 @@ public class Join extends Command {
 			MainServer.getListChannel().add(ch);
 		} else {
 			ch.getlUser().add(u);
-			System.out.println("else");
 		}
+		
+		// insert channel into database
+		try {
+			DAOChannel d = (DAOChannel) DAOFactory.getDAOChannel();
+			d.create(ch);
+		} catch (DAOException e) {
+			System.err.println("Error during insert channel");
+			e.printStackTrace();
+		}
+
 		
 		//add to user a channel
 		u.setChannelUser(ch);

@@ -5,6 +5,9 @@ import java.net.Socket;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cnam.tchat.aca.server.dao.DAOException;
+import cnam.tchat.aca.server.dao.DAOUser;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
@@ -41,9 +44,16 @@ public class Connect extends Command {
 		
 		// add user to the server
 		MainServer.getUserConnected().put(nicknameUser, u);
-		System.out.println(MainServer.getUserConnected());
 		
 		// insert user into database
+		try {
+			DAOUser d = (DAOUser) DAOFactory.getDAOUser();
+			d.create(u);
+		} catch (DAOException e) {
+			System.err.println("Error during insert user");
+			e.printStackTrace();
+		}
+		
 		
 		// return message to client
 		JSONObject jsonMessage = new JSONObject();

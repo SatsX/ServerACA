@@ -8,6 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONObject;
 
@@ -16,8 +19,12 @@ import cnam.tchat.aca.server.command.Connect;
 import cnam.tchat.aca.server.command.Exit;
 import cnam.tchat.aca.server.command.Join;
 import cnam.tchat.aca.server.command.Quit;
+import cnam.tchat.aca.server.dao.DAOException;
+import cnam.tchat.aca.server.dao.DAOPost;
+import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.Channel;
 import cnam.tchat.aca.server.io.MainServer;
+import cnam.tchat.aca.server.io.Post;
 import cnam.tchat.aca.server.io.User;
 
 /**
@@ -142,6 +149,29 @@ public class MessageProcess implements Runnable{
 						User u = MainServer.getUserConnected().get(senderNickName);
 						
 						Channel ch = u.getChannelUser();
+						
+						// insert post into database
+						// current date
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						Date date = new Date();
+						String datePost = dateFormat.format(date);
+						
+						// create new post
+						Post p = new Post();
+						p.setUserId(u.getUserId());
+						p.setChannelId(ch.getChannelId());
+						p.setContent(msgToRoom.getString("post"));
+						p.setPostDate(datePost);
+						
+						//put post into database
+						try {
+							DAOPost dp = (DAOPost) DAOFactory.getDAOPost();
+							dp.create(p);
+						} catch (DAOException e) {
+							System.err.println("Error during insert post");
+							e.printStackTrace();
+						}
+						
 						// send the message to all of Channel's users
 						for(User tmp : ch.getlUser()){
 							System.out.println(tmp);
