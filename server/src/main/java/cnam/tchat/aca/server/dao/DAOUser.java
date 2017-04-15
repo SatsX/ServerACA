@@ -31,7 +31,7 @@ public class DAOUser implements DAO<User> {
 	}
 	// Find the user.
 	public User find(Object id) throws DAOException {
-		if(!(id instanceof Integer))
+		if(!(id instanceof String))
 			throw new DAOException("ID not take in charge.");
 		
 		final String sql = "SELECT * FROM `user` WHERE `User_id` = ? ;";
@@ -45,7 +45,7 @@ public class DAOUser implements DAO<User> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, (Integer) id);
+			st.setString(1, (String) id);
 			r = st.executeQuery();
 			
 			if(r.next()){
@@ -86,7 +86,7 @@ public class DAOUser implements DAO<User> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getUserId());
+			st.setString(1, obj.getUserId());
 			st.setString(2, obj.getUserName());
 			st.executeUpdate();
 				
@@ -119,7 +119,7 @@ public class DAOUser implements DAO<User> {
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getUserName());
-					st.setInt(2, obj.getUserId());
+					st.setString(2, obj.getUserId());
 					r = st.executeUpdate();
 					
 					// check modification		
@@ -152,7 +152,7 @@ public class DAOUser implements DAO<User> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getUserId());
+			st.setString(1, obj.getUserId());
 			r = st.executeUpdate();
 			
 			if(r < 1){

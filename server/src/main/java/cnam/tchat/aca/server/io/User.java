@@ -3,27 +3,30 @@
  */
 package cnam.tchat.aca.server.io;
 
+import java.net.Socket;
+
 /**
  * @author Arnold / Adrien / Cihat
  *
  */
 public class User {
 
-	private int userId;
+	private String userId;
 	private String userName;
+	private Socket socketUser;
 	
 	
 	/**
 	 * @return the userId
 	 */
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -44,6 +47,20 @@ public class User {
 
 
 	
+	/**
+	 * @return the socketUser
+	 */
+	public Socket getSocketUser() {
+		return socketUser;
+	}
+
+	/**
+	 * @param socketUser the socketUser to set
+	 */
+	public void setSocketUser(Socket socketUser) {
+		this.socketUser = socketUser;
+	}
+
 	public boolean compareTo(User u){
 		if(this.userId == u.userId && this.userName.compareTo(u.userName) == 0) {
 			return true;

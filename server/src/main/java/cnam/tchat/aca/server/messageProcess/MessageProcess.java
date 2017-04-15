@@ -52,10 +52,10 @@ public class MessageProcess implements Runnable{
 					Command command;
 					switch(jsonMessage.getString("post")){
 						case "#CONNECT" :
-							command = new Connect(jsonMessage.getJSONArray("args"));
+							command = new Connect(jsonMessage.getJSONArray("args"), jsonMessage.getString("nickname"), so);
 							break;
 						case "#JOIN" :
-							command = new Join(jsonMessage.getJSONArray("args"));
+							command = new Join(jsonMessage.getJSONArray("args"), jsonMessage.getString("nickname"));
 							break;
 						case "#EXIT" :
 							command = new Exit();

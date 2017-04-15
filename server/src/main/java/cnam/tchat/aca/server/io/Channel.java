@@ -74,24 +74,8 @@ public class Channel {
 			return false;
 		}
 	}
-
 	
-	public boolean existenceChannel(String name) throws DAOException {
-		DAOChannel d = (DAOChannel) DAOFactory.getDAOChannel();
-		//Create list channel
-		ArrayList<Channel> lch; 
-		//Listing channel
-		lch = d.listAllChannel();
-		//Check existence of the channel
-		for (Channel tmp : lch){
-			if(tmp.getChannelName().equals(name)){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public Channel() throws DAOException {
+	public Channel() {
 		
 	}
 }
