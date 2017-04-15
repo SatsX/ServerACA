@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 15 Avril 2017 à 00:48
+-- Généré le :  Sam 15 Avril 2017 à 04:53
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -30,13 +30,6 @@ CREATE TABLE `channel` (
   `channel_id` int(11) NOT NULL,
   `channel_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `channel`
---
-
-INSERT INTO `channel` (`channel_id`, `channel_name`) VALUES
-(1, 'Channel1');
 
 -- --------------------------------------------------------
 
@@ -97,7 +90,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `channel`
 --
 ALTER TABLE `channel`
-  MODIFY `channel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `channel_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `post`
+--
+ALTER TABLE `post`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
