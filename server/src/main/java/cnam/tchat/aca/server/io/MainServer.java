@@ -10,12 +10,18 @@ import cnam.tchat.aca.server.dao.DAOChannel;
 import cnam.tchat.aca.server.dao.DAOException;
 import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.messageProcess.MessageProcess;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 /**
  * @authors Adrien / Cihat / Arnold
  *
  */
 // Class MainServer
 public class MainServer implements Runnable{
+	
+	static final Logger logger = Logger.getLogger(MainServer.class);
+	
 	private Integer port;
 	private ServerSocket socketPrincipal;
 	private static HashMap<String, User> userConnected;
@@ -29,8 +35,9 @@ public class MainServer implements Runnable{
 		
 	// Implemement run
 	public void run() {		
-		System.out.println("Server ACA started !!");
-		System.out.println("[INFO] : Start server on the port : "+this.port);
+		BasicConfigurator.configure();
+		logger.info("Server ACA started !!");
+		logger.info("[INFO] : Start server on the port : "+this.port);
 		
 		try {
 			socketPrincipal = new ServerSocket(this.port);
