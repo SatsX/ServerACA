@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 15 Avril 2017 à 13:46
+-- Généré le :  Sam 15 Avril 2017 à 14:16
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -41,7 +41,7 @@ CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `content` varchar(20000) NOT NULL,
   `post_date` varchar(25) NOT NULL,
-  `user_id` varchar(16) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
   `channel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -90,7 +90,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `channel`
 --
 ALTER TABLE `channel`
-  MODIFY `channel_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `channel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `post`
 --
