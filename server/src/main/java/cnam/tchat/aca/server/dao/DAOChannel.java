@@ -52,7 +52,7 @@ public class DAOChannel implements DAO<Channel> {
 			r = st.executeQuery();
 			
 			if(r.next()){
-				ch.setChannelId(r.getInt("channel_id"));
+				ch.setChannelId(r.getString("channel_id"));
 				ch.setChannelName(r.getString("channel_name"));
 				
 				return ch;
@@ -89,7 +89,7 @@ public class DAOChannel implements DAO<Channel> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getChannelId());
+			st.setString(1, obj.getChannelId());
 			st.setString(2, obj.getChannelName());
 			// Execute the request
 			st.executeUpdate();
@@ -122,7 +122,7 @@ public class DAOChannel implements DAO<Channel> {
 					c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 					st = c.prepareStatement(sql);
 					st.setString(1, obj.getChannelName());
-					st.setInt(2, obj.getChannelId());
+					st.setString(2, obj.getChannelId());
 					// Execute the request
 					r = st.executeUpdate();
 					
@@ -157,7 +157,7 @@ public class DAOChannel implements DAO<Channel> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, obj.getChannelId());
+			st.setString(1, obj.getChannelId());
 			// Execute the request 
 			r = st.executeUpdate();
 			// Check removal
@@ -199,7 +199,7 @@ public class DAOChannel implements DAO<Channel> {
 				// Create a channel
 				Channel ch = new Channel();
 				// Recover all fields
-				ch.setChannelId(r.getInt("channel_id"));
+				ch.setChannelId(r.getString("channel_id"));
 				ch.setChannelName(r.getString("channel_name"));
 				// Add the channel to the list
 				l.add(ch);

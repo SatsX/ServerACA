@@ -12,7 +12,7 @@ import java.util.ArrayList;
 // Class Channel
 public class Channel {
 	
-	private int channelId;
+	private String channelId;
 	private String channelName;
 	// List user
 	private ArrayList<User> lUser;
@@ -21,7 +21,7 @@ public class Channel {
 	/**
 	 * @return the channelId
 	 */
-	public int getChannelId() {
+	public String getChannelId() {
 		return channelId;
 	}
 
@@ -29,7 +29,7 @@ public class Channel {
 	/**
 	 * @param channelId the channelId to set
 	 */
-	public void setChannelId(int channelId) {
+	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
 

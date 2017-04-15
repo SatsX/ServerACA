@@ -160,6 +160,7 @@ public class MessageProcess implements Runnable{
 						Post p = new Post();
 						p.setUserId(u.getUserId());
 						p.setChannelId(ch.getChannelId());
+						System.out.println(ch.getChannelId());
 						p.setContent(msgToRoom.getString("post"));
 						p.setPostDate(datePost);
 						

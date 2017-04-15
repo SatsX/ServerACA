@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 15 Avril 2017 à 14:16
+-- Généré le :  Sam 15 Avril 2017 à 15:19
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `channel` (
-  `channel_id` int(11) NOT NULL,
+  `channel_id` varchar(255) NOT NULL,
   `channel_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,7 +42,7 @@ CREATE TABLE `post` (
   `content` varchar(20000) NOT NULL,
   `post_date` varchar(25) NOT NULL,
   `user_id` varchar(255) NOT NULL,
-  `channel_id` int(11) NOT NULL
+  `channel_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -87,11 +87,6 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT pour la table `channel`
---
-ALTER TABLE `channel`
-  MODIFY `channel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
@@ -104,7 +99,6 @@ ALTER TABLE `post`
 -- Contraintes pour la table `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `foreignkey_channel` FOREIGN KEY (`channel_id`) REFERENCES `channel` (`channel_id`),
   ADD CONSTRAINT `foreignkey_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`User_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

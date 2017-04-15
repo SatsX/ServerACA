@@ -57,7 +57,7 @@ public class DAOPost implements DAO<Post> {
 				p.setContent(r.getString("content"));
 				p.setPostDate(r.getString("post_date"));
 				p.setUserId(r.getString("user_id"));
-				p.setChannelId(r.getInt("channel_id"));
+				p.setChannelId(r.getString("channel_id"));
 				// Return data
 				return p;
 			// Check existence post for id
@@ -97,7 +97,7 @@ public class DAOPost implements DAO<Post> {
 			st.setString(2, obj.getContent());
 			st.setString(3, obj.getPostDate());
 			st.setString(4, obj.getUserId());
-			st.setInt(5, obj.getChannelId());
+			st.setString(5, obj.getChannelId());
 			// Execute the request
 			st.executeUpdate();
 		// Check the request

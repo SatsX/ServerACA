@@ -14,7 +14,7 @@ public class Post {
 	private String content;
 	private String postDate;
 	private String userId;
-	private int channelId;
+	private String channelId;
 	
 	/**
 	 * @return the postId
@@ -75,14 +75,14 @@ public class Post {
 	/**
 	 * @return the channelId
 	 */
-	public int getChannelId() {
+	public String getChannelId() {
 		return channelId;
 	}
 
 	/**
 	 * @param channelId the ChannelId to set
 	 */
-	public void setChannelId(int channelId) {
+	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
 	// overload compareTo
