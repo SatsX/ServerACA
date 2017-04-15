@@ -1,13 +1,13 @@
 # ServerACA
 # Adrien Cihat Arnold
 
-If you are client must be use JSONObject & JSONArray to communicate with server. 
-The server was developped to CNAM. 
+If you are a client, you must use JSONObject & JSONArray to communicate with server. 
+The server was developped in CNAM. 
 
 # Procedure to install 
-	1) Clone the git depot
-	2) Import thanks to Maven
-	3) Create a database with the file in BDD folder
+	1) Clone the git repository
+	2) Import with Maven
+	3) Create a database with the sql file in BDD folder
 	4) Launch the application 
 		To launch server you use the .jar file and execute it
 		Windows : launch .exe
@@ -15,7 +15,7 @@ The server was developped to CNAM.
 	5) Can launch on only device to discute between you
 
 # Communication with client
-	It can use with differents client thanks to :
+	It can be used by several client :
 		Command available : 
 		#CONNECT with args : IP adress nickname
 		#JOIN with args channelName
