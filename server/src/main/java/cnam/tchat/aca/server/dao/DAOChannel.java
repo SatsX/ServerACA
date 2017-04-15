@@ -31,11 +31,11 @@ public class DAOChannel implements DAO<Channel> {
 		DAOChannel.PASSWORD = password;
 	}
 	//Find the channel
-	public Channel find(Object id) throws DAOException {
-		if(!(id instanceof Integer))
-			throw new DAOException("ID not take in charge.");
+	public Channel find(Object channelName) throws DAOException {
+		if(!(channelName instanceof String))
+			throw new DAOException("channelName not take in charge.");
 		
-		final String sql = "SELECT * FROM `channel` WHERE `channel_id` = ? ;";
+		final String sql = "SELECT * FROM `channel` WHERE `channel_name` = ? ;";
 		
 		Connection c = null;
 		PreparedStatement st = null;
@@ -46,7 +46,7 @@ public class DAOChannel implements DAO<Channel> {
 			// initialize connection
 			c = DriverManager.getConnection(URL, LOGIN, PASSWORD);
 			st = c.prepareStatement(sql);
-			st.setInt(1, (Integer) id);
+			st.setString(1, (String) channelName);
 			r = st.executeQuery();
 			
 			if(r.next()){
