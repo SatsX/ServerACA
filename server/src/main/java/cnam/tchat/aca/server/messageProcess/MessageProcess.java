@@ -63,10 +63,10 @@ public class MessageProcess implements Runnable{
 							command = new Join(jsonMessage.getJSONArray("args"), jsonMessage.getString("nickname"));
 							break;
 						case "#EXIT" :
-							command = new Exit();
+							command = new Exit(jsonMessage.getString("nickname"));
 							break;
 						case "#QUIT" :
-							command = new Quit();
+							command = new Quit(jsonMessage.getString("nickname"));
 							break;
 						default :
 							JSONObject messageToSend = new JSONObject();

@@ -2,8 +2,9 @@ package cnam.tchat.aca.server.command;
 
 public abstract class Command {
 
+	protected String nicknameUser;
+	
 	public Command(){
-		// Useless
 	}
 	
 	public abstract String takeDecision();

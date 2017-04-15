@@ -18,14 +18,12 @@ import cnam.tchat.aca.server.io.User;
 public class Connect extends Command {
 
 	private JSONArray parameters;
-	private String nicknameUser;
 	private Socket socketUser;
 	
 	/**
 	 * 
 	 */
 	public Connect(JSONArray parameters, String nicknameUser, Socket socketUser) {
-		// TODO Auto-generated constructor stub
 		this.parameters = parameters;
 		this.nicknameUser = nicknameUser;
 		this.socketUser = socketUser;

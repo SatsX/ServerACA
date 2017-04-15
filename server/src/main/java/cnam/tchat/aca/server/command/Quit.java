@@ -3,7 +3,13 @@
  */
 package cnam.tchat.aca.server.command;
 
+import java.util.ArrayList;
+
 import org.json.JSONObject;
+
+import cnam.tchat.aca.server.io.Channel;
+import cnam.tchat.aca.server.io.MainServer;
+import cnam.tchat.aca.server.io.User;
 
 /**
  * @author arnold
@@ -14,8 +20,8 @@ public class Quit extends Command {
 	/**
 	 * 
 	 */
-	public Quit() {
-		// TODO Auto-generated constructor stub
+	public Quit(String nicknameUser) {
+		this.nicknameUser = nicknameUser;
 	}
 
 	/* (non-Javadoc)
@@ -23,6 +29,34 @@ public class Quit extends Command {
 	 */
 	@Override
 	public String takeDecision() {
+		
+		User u = MainServer.getUserConnected().get(nicknameUser);
+		Channel ch = u.getChannelUser();
+		System.out.println(MainServer.getUserConnected());
+		
+		
+		//remove user from channel
+		
+		if(u.getChannelUser() != null){
+			int indexUser = 0;
+			ArrayList<Channel> listCh = MainServer.getListChannel();
+			for(Channel tmp : listCh) {
+				if (ch.getChannelName().equals(tmp.getChannelName())){
+					for(User tmpUser : tmp.getlUser()){
+						if(tmpUser.getUserName().equals(nicknameUser)){
+							System.out.println("avant : " + u.getChannelUser().getlUser());
+							tmp.getlUser().remove(indexUser);
+							System.out.println("apres : " + u.getChannelUser().getlUser());
+							u.setChannelUser(null);
+							break;
+						}
+						indexUser++;
+					}
+					break;
+				}
+			}
+		}
+		
 		JSONObject jsonMessage = new JSONObject();
 		jsonMessage.put("nickname", "server");
 		jsonMessage.put("post", "You have left channel");

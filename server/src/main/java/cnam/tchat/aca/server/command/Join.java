@@ -17,12 +17,10 @@ import cnam.tchat.aca.server.io.User;
 public class Join extends Command {
 
 	private String channel;
-	private String nicknameUser;
 	/**
 	 * 
 	 */
 	public Join(JSONArray parameters, String nicknameUser) {
-		// TODO Auto-generated constructor stub
 		this.channel = parameters.getString(0);
 		this.nicknameUser = nicknameUser;
 	}
