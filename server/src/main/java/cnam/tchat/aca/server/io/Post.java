@@ -12,7 +12,7 @@ public class Post {
 	private int postId;
 	private String content;
 	private String postDate;
-	private int userId;
+	private String userId;
 	private int channelId;
 	
 	/**
@@ -60,14 +60,14 @@ public class Post {
 	/**
 	 * @return the userId
 	 */
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	

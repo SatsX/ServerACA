@@ -49,7 +49,7 @@ public class DAOUser implements DAO<User> {
 			r = st.executeQuery();
 			
 			if(r.next()){
-				a.setUserId(r.getInt("User_id"));
+				a.setUserId(r.getString("User_id"));
 				a.setUserName(r.getString("User_name"));
 				
 				return a;
@@ -192,7 +192,7 @@ public class DAOUser implements DAO<User> {
 				// Create a user
 				User ch = new User();
 				// recover all fields
-				ch.setUserId(r.getInt("User_id"));
+				ch.setUserId(r.getString("User_id"));
 				ch.setUserName(r.getString("User_name"));
 				// Add the user to the list
 				l.add(ch);

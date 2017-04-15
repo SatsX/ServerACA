@@ -31,11 +31,11 @@ public class DAOFactory {
 	public static DAO<Channel> getDAOChannel() throws DAOException{
 		return new DAOChannel(URL, LOGIN, PASSWORD);
 	}
-	
+	// Instance DAOLOgInfo
 	public static DAO<LogInfo> getDAOLogInfo() throws DAOException{
 		return new DAOLogInfo(URL, LOGIN, PASSWORD);
 	}
-	
+	// Instance DAOPost
 	public static DAO<Post> getDAOPost() throws DAOException{
 		return new DAOPost(URL, LOGIN, PASSWORD);
 	}

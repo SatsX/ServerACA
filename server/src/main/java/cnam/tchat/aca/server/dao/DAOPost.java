@@ -50,7 +50,7 @@ public class DAOPost implements DAO<Post> {
 				p.setPostId(r.getInt("post_id"));
 				p.setContent(r.getString("content"));
 				p.setPostDate(r.getString("post_date"));
-				p.setUserId(r.getInt("user_id"));
+				p.setUserId(r.getString("user_id"));
 				p.setChannelId(r.getInt("channel_id"));
 				return p;
 				
@@ -88,7 +88,7 @@ public class DAOPost implements DAO<Post> {
 			st.setInt(1, obj.getPostId());
 			st.setString(2, obj.getContent());
 			st.setString(3, obj.getPostDate());
-			st.setInt(4, obj.getUserId());
+			st.setString(4, obj.getUserId());
 			st.setInt(5, obj.getChannelId());
 			st.executeUpdate();
 				
