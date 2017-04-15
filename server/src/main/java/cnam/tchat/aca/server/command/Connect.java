@@ -2,6 +2,7 @@ package cnam.tchat.aca.server.command;
 
 import java.net.Socket;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,6 +12,8 @@ import cnam.tchat.aca.server.factory.DAOFactory;
 import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
+import org.apache.log4j.BasicConfigurator;
+
 /**
  * @authors Adrien / Cihat / Arnold
  *
@@ -18,6 +21,8 @@ import cnam.tchat.aca.server.io.User;
 
 // Connect class extends Command
 public class Connect extends Command {
+	
+	static final Logger logger = Logger.getLogger(Connect.class);
 
 	//Implements Connect
 	private JSONArray parameters;
@@ -36,6 +41,8 @@ public class Connect extends Command {
 	@Override
 	public String takeDecision() {
 		
+		BasicConfigurator.configure();
+		
 		// Create new user
 		User u = new User();
 		u.setUserId(socketUser.toString());
@@ -50,7 +57,7 @@ public class Connect extends Command {
 			DAOUser d = (DAOUser) DAOFactory.getDAOUser();
 			d.create(u);
 		} catch (DAOException e) {
-			System.err.println("Error during insert user");
+			logger.error("Error during insert user");
 			e.printStackTrace();
 		}
 		

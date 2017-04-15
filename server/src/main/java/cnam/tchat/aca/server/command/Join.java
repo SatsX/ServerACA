@@ -12,6 +12,9 @@ import cnam.tchat.aca.server.io.Channel;
 import cnam.tchat.aca.server.io.MainServer;
 import cnam.tchat.aca.server.io.User;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 /**
  * @authors Adrien / Cihat / Arnold
  *
@@ -19,6 +22,9 @@ import cnam.tchat.aca.server.io.User;
 
 //Join Class extends Command
 public class Join extends Command {
+	
+	static final Logger logger = Logger.getLogger(Join.class);
+	
 	//implements arguments
 	private String channel;
 	
@@ -57,7 +63,7 @@ public class Join extends Command {
 			DAOChannel d = (DAOChannel) DAOFactory.getDAOChannel();
 			d.create(ch);
 		} catch (DAOException e) {
-			System.err.println("Error during insert channel");
+			logger.error("Error during insert channel");
 			e.printStackTrace();
 		}
 
@@ -76,8 +82,6 @@ public class Join extends Command {
 	// check if channel exists, if exists return channel, else return null
 	private Channel existenceChannel() {
 		for (Channel tmp : MainServer.getListChannel()) {
-			System.out.println("cc" + tmp.getChannelName());
-			System.out.println("hey" + channel);
 			if(tmp.getChannelName().compareTo(channel) == 0) {
 				return tmp;
 			}

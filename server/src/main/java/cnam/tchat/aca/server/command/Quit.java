@@ -29,7 +29,6 @@ public class Quit extends Command {
 		
 		User u = MainServer.getUserConnected().get(nicknameUser);
 		Channel ch = u.getChannelUser();
-		System.out.println(MainServer.getUserConnected());
 		
 		
 		//remove user from channel
@@ -41,9 +40,7 @@ public class Quit extends Command {
 				if (ch.getChannelName().equals(tmp.getChannelName())){
 					for(User tmpUser : tmp.getlUser()){
 						if(tmpUser.getUserName().equals(nicknameUser)){
-							System.out.println("avant : " + u.getChannelUser().getlUser());
 							tmp.getlUser().remove(indexUser);
-							System.out.println("apres : " + u.getChannelUser().getlUser());
 							u.setChannelUser(null);
 							break;
 						}

@@ -43,7 +43,7 @@ public class MainServer implements Runnable{
 			socketPrincipal = new ServerSocket(this.port);
 		// Check connection to socket
 		} catch (IOException e) {
-			System.err.println("[ERROR] : connection to socket is impossible ");
+			logger.error("[ERROR] : connection to socket is impossible ");
 			e.printStackTrace();
 		}
 		
@@ -52,7 +52,7 @@ public class MainServer implements Runnable{
 			DAOChannel dc = (DAOChannel) DAOFactory.getDAOChannel();
 			listChannel = dc.listAllChannel();
 		} catch (DAOException e1) {
-			System.err.println("Error during listing channel");
+			logger.error("Error during listing channel");
 			e1.printStackTrace();
 		}
 		
@@ -60,7 +60,7 @@ public class MainServer implements Runnable{
 			try {
 				// Accept socket principal
 				Socket s = socketPrincipal.accept();
-				System.out.println("New user connected " + s );
+				logger.info("New user connected " + s );
 				// Instance message process
 				MessageProcess p = new MessageProcess(s);
 				// Start thread to message procces
@@ -68,7 +68,7 @@ public class MainServer implements Runnable{
 				t.start();
 			// Check accept requests on main socket 	
 			} catch (IOException e) {
-				System.err.println("[ERROR] : Failed to accept requests on main socket.");
+				logger.error("[ERROR] : Failed to accept requests on main socket.");
 				e.printStackTrace();
 			
 			} finally {
@@ -78,7 +78,7 @@ public class MainServer implements Runnable{
 					}
 				// Check server socket initialization
 				} catch (IOException e) {
-					System.err.println("Error during Server Socket init.");
+					logger.error("Error during Server Socket init.");
 					e.printStackTrace();
 				}
 				

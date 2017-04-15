@@ -41,9 +41,7 @@ public class Exit extends Command {
 				if (ch.getChannelName().equals(tmp.getChannelName())){
 					for(User tmpUser : tmp.getlUser()){
 						if(tmpUser.getUserName().equals(nicknameUser)){
-							System.out.println("avant : " + u.getChannelUser().getlUser());
 							tmp.getlUser().remove(indexUser);
-							System.out.println("apres : " + u.getChannelUser().getlUser());
 							u.setChannelUser(null);
 							break;
 						}
